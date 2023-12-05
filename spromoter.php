@@ -54,6 +54,13 @@ function spromoter_frontend_init()
 		if ($spromoter_settings['disable_native_review_system']){
 			add_filter( 'comments_open', 'spromoter_remove_native_review_system', null, 2 );
 		}
+
+		// Render bottom line widget
+//		if ($spromoter_settings['show_bottom_line_widget']){
+//			add_action('woocommerce_after_single_product_summary', function (){
+//				dd('bottom line widget');
+//			});
+//		}
 	}
 }
 
@@ -79,13 +86,53 @@ function spromoter_show_reviews_widget() {
 	global $product;
 
 	if ( $product->get_reviews_allowed() == true ) {
-		$spromoter = new SpromoterApi();
-		$reviews = $spromoter->getReviews($product->get_id());
+		$product_data = spromoter_get_product_data($product);
 
-		if (count($reviews) > 0){
-
-		}
+		echo "<div class='spromoter spromoter-main-widget'
+		data-spromoter-product-id='".$product_data['id']."'
+		data-spromoter-name='".$product_data['title']."'
+		data-spromoter-url='".$product_data['url']."'
+		data-spromoter-image-url='".$product_data['image-url']."'
+		data-spromoter-price='".$product->get_price()."'
+		data-spromoter-currency='".get_woocommerce_currency()."'
+		data-spromoter-description='".$product_data['description']."'
+	></div>";
 	}
+}
+
+function spromoter_get_product_data($product) {
+	$settings = get_option('spromoter_settings',spromoter_get_default_settings());
+	$product_data = array(
+		'app_id' => esc_attr($settings['app_id']),
+		'shop_domain' => esc_attr(parse_url(get_bloginfo('url'),PHP_URL_HOST)),
+		'url' => esc_attr(get_permalink($product->get_id())),
+		'lang' => esc_attr('en'),
+		'description' => esc_attr(wp_strip_all_tags($product->get_description())),
+		'id' => esc_attr($product->get_id()),
+		'title' => esc_attr($product->get_title()),
+		'image-url' => esc_attr(wp_get_attachment_url(get_post_thumbnail_id($product->get_id())))
+	);
+
+	//if($settings['yotpo_language_as_site'] == true) {
+		$lang = explode('-', get_bloginfo('language'));
+		if(strlen($lang[0]) == 2) {
+			$product_data['lang'] = $lang[0];
+		}
+	//}
+	$specs_data = get_specs_data($product);
+	if(!empty($specs_data)){ $product_data['specs'] = $specs_data;  }
+
+	return $product_data;
+}
+
+function get_specs_data($product) {
+	$specs_data = array();
+	if($product->get_sku()){ $specs_data['external_sku'] =$product->get_sku();}
+	if($product->get_attribute('upc')){ $specs_data['upc'] =$product->get_attribute('upc');}
+	if($product->get_attribute('isbn')){ $specs_data['isbn'] = $product->get_attribute('isbn');}
+	if($product->get_attribute('brand')){ $specs_data['brand'] = $product->get_attribute('brand');}
+	if($product->get_attribute('mpn')){ $specs_data['mpn'] =$product->get_attribute('mpn');}
+	return $specs_data;
 }
 
 function spromoter_conversion_track( $order_id ) {
@@ -153,16 +200,24 @@ function spromoter_remove_native_review_system( $open, $post_id ) {
 	return $open;
 }
 
+function spromoter_get_settings()
+{
+	$default_settings = spromoter_get_default_settings();
+	$settings = get_option('spromoter_settings', $default_settings);
+
+	return array_merge($default_settings, $settings);
+}
+
 function spromoter_compatible() {
 	return version_compare(phpversion(), '5.2.0') >= 0 && function_exists('curl_init');
 }
 
-function get_spromoter_logo_url()
+function spromoter_get_logo_url()
 {
 	return plugins_url('assets/images/logo.png', __FILE__);
 }
 
-function get_spromoter_small_logo_url()
+function spromoter_get_small_logo_url()
 {
 	return plugins_url('assets/images/small-logo.jpg', __FILE__);
 }

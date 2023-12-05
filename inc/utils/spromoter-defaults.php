@@ -6,5 +6,6 @@ function spromoter_get_default_settings(){
 		'api_key' => '',
 		'order_status' => 'completed',
 		'disable_native_review_system' => true,
+		'show_bottom_line_widget' => true,
 	);
 }

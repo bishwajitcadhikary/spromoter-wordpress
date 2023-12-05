@@ -16,7 +16,7 @@ function spromoter_display_register_page() {
                         <!-- Logo -->
                         <div class="app-brand justify-content-center mb-4 mt-2">
                             <a href="#" class="app-brand-link gap-2">
-                                <img src="<?= get_spromoter_logo_url() ?>" alt="Brand Logo" style="width: 100%;">
+                                <img src="<?= spromoter_get_logo_url() ?>" alt="Brand Logo" style="width: 100%;">
                             </a>
                         </div>
                         <!-- /Logo -->
