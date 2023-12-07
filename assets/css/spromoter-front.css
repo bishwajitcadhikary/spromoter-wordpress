@@ -1,1 +1,40 @@
-/*Code here*/
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+.spromoter-rating {
+  border: none;
+  float: left;
+}
+
+.spromoter-rating > input {
+  display: none;
+}
+.spromoter-rating > label:before {
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.spromoter-rating > .half:before {
+  content: "\f089";
+  position: absolute;
+}
+
+.spromoter-rating > label {
+  color: #ddd;
+  float: right;
+}
+
+.spromoter-rating > input:checked ~ label,
+.spromoter-rating:not(:checked) > label:hover,
+.spromoter-rating:not(:checked) > label:hover ~ label {
+  color: #ffd700;
+}
+
+.spromoter-rating > input:checked + label:hover,
+.spromoter-rating > input:checked ~ label:hover,
+.spromoter-rating > label:hover ~ input:checked ~ label,
+.spromoter-rating > input:checked ~ label:hover ~ label {
+  color: #ffed85;
+}

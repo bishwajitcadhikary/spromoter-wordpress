@@ -78,23 +78,50 @@ function spromoter_show_main_widget_in_tab($tabs) {
 	}
 }
 
+
 function spromoter_show_reviews_widget() {
 	global $product;
 
 	if ( $product->get_reviews_allowed() == true ) {
 		$product_data = spromoter_get_product_data($product);
 
-		echo "<div class='spromoter spromoter-main-widget'
-		data-spromoter-product-id='".$product_data['id']."'
-		data-spromoter-name='".$product_data['title']."'
-		data-spromoter-url='".$product_data['url']."'
-		data-spromoter-image-url='".$product_data['image-url']."'
-		data-spromoter-price='".$product->get_price()."'
-		data-spromoter-currency='".get_woocommerce_currency()."'
-		data-spromoter-description='".$product_data['description']."'
-	></div>";
+		echo "<div class='spromoter-container'>
+			<div class='spromoter-reviews'>
+				<div class='spromoter-single-review'
+					data-spromoter-comment-author='".$product_data['id']."'
+					data-spromoter-comment-avater='".$product_data['title']."'
+					data-spromoter-comment-content='".$product_data['title']."'
+					data-spromoter-comment-ratings='".$product_data['url']."'
+					data-spromoter-comment-date='".$product_data['image-url']."'
+				></div>
+			</div>
+			<div id='spromoter-reviews-form'></div>
+	</div>";
 	}
 }
+
+// function spromoter_show_reviews_widget() {
+// 	global $product;
+
+// 	if ( $product->get_reviews_allowed() == true ) {
+// 		$product_data = spromoter_get_product_data($product);
+
+// 		echo "<div class='spromoter-container'>
+// 			<div class='spromoter-reviews'>
+// 				<div class='spromoter-single-review'
+// 					data-spromoter-product-id='".$product_data['id']."'
+// 					data-spromoter-name='".$product_data['title']."'
+// 					data-spromoter-url='".$product_data['url']."'
+// 					data-spromoter-image-url='".$product_data['image-url']."'
+// 					data-spromoter-price='".$product->get_price()."'
+// 					data-spromoter-currency='".get_woocommerce_currency()."'
+// 					data-spromoter-description='".$product_data['description']."'
+// 				></div>
+// 			</div>
+// 			<div id='spromoter-reviews-form'></div>
+// 	</div>";
+// 	}
+// }
 
 function spromoter_get_product_data($product) {
 	$settings = get_option('spromoter_settings',spromoter_get_default_settings());
@@ -231,7 +258,5 @@ function spromoter_get_small_logo_url()
 function declare_hops_support() {
 	if ( class_exists( FeaturesUtil::class ) ) {
 		FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
-
-
 	}
 }
