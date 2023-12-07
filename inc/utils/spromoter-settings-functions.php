@@ -195,6 +195,7 @@ function spromoter_save_settings(){
         $spromoter_settings['order_status'] = $_POST['order_status'];
         $spromoter_settings['disable_native_review_system'] = ($_POST['disable_native_review_system'] == '1');
         // Check credentials
+<<<<<<< HEAD
         // $spromoter = new SpromoterApi();
         // $authenticated = $spromoter->checkCredentials($_POST['api_key'], $_POST['app_id']);
         // if ($authenticated){
@@ -203,5 +204,15 @@ function spromoter_save_settings(){
         // }else{
         //     spromoter_display_messages('Please check your api credentials', true);
         // }
+=======
+//        $spromoter = new SpromoterApi();
+//        $authenticated = $spromoter->checkCredentials($_POST['api_key'], $_POST['app_id']);
+//        if ($authenticated){
+	        update_option('spromoter_settings', $spromoter_settings);
+            spromoter_display_messages('Settings saved successfully');
+//        }else{
+//            spromoter_display_messages('Please check your api credentials', true);
+//        }
+>>>>>>> 9861e173062d548c75f296b603c33ffd93ba80a3
     }
 }
