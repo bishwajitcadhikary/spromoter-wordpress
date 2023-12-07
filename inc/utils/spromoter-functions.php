@@ -1,7 +1,5 @@
 <?php
 
-
-
 function spromoter_admin_settings()
 {
 	add_action('admin_print_styles', 'spromoter_admin_styles');
