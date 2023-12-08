@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Showing Reviews
   const reviewContainer = document.querySelectorAll('.spromoter-single-review');
 
-  let reviewsdata = ["", ]
+  let reviewsdata = []
 
   reviewContainer.forEach(function(element) {
       var author = element.getAttribute('data-spromoter-comment-author');
