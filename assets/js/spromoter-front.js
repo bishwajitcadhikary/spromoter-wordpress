@@ -3,12 +3,14 @@ document.addEventListener('DOMContentLoaded', function () {
   // Showing Reviews
   const reviewContainer = document.querySelectorAll('.spromoter-single-review');
 
+  let reviewsdata = ["", ]
+
   reviewContainer.forEach(function(element) {
       var author = element.getAttribute('data-spromoter-comment-author');
       var content = element.getAttribute('data-spromoter-comment-content');
 
-      var reviewContent = 'Name: ' + author + '<br>' +
-                        'Description: ' + content + '<br>'
+      var reviewContent = "" +
+      ""
       element.innerHTML = reviewContent;
   });
 
@@ -16,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const reviewForm = document.getElementById('spromoter-reviews-form');
 
     var reviewFormHTML = "" + 
-    "<form class='spromoter-review-form' action='post'>" +
+    "<form class='spromoter-review-form' action='' method='post'>" +
       "<input type='text' id='' name='' class='spromoter-form-input' placeholder='Name'>" +
       "<input type='email' id='' name='' class='spromoter-form-input' placeholder='Email'>" +
       "<fieldset class='spromoter-rating' id=''>" +

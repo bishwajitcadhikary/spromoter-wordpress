@@ -78,9 +78,8 @@ function spromoter_show_main_widget_in_tab($tabs) {
 	}
 }
 
-
 function spromoter_show_reviews_widget() {
-	global $product;
+	global $product;	
 
 	if ( $product->get_reviews_allowed() == true ) {
 		$product_data = spromoter_get_product_data($product);
@@ -105,7 +104,6 @@ function spromoter_show_reviews_widget() {
 
 // 	if ( $product->get_reviews_allowed() == true ) {
 // 		$product_data = spromoter_get_product_data($product);
-
 // 		echo "<div class='spromoter-container'>
 // 			<div class='spromoter-reviews'>
 // 				<div class='spromoter-single-review'
