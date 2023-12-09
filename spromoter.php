@@ -184,6 +184,7 @@ function spromoter_admin_scripts()
 
 function spromoter_front_styles()
 {
+	wp_enqueue_style('spromoter-main-styles', plugins_url('assets/css/spromoter-main.css', __FILE__));
 	wp_enqueue_style('spromoter-front-styles', plugins_url('assets/css/spromoter-front.css', __FILE__));
 }
 
