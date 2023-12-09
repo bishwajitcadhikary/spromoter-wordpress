@@ -14,22 +14,22 @@ function spromoter_display_register_page() {
                 <div class="card">
                     <div class="card-body">
                         <!-- Logo -->
-                        <div class="app-brand justify-content-center mb-4 mt-2">
-                            <a href="#" class="app-brand-link gap-2">
+                        <div class="app-brand justify-content-center">
+                            <a href="#" class="app-brand-link">
                                 <img src="<?= spromoter_get_logo_url() ?>" alt="Brand Logo" style="width: 100%;">
                             </a>
                         </div>
                         <!-- /Logo -->
-                        <h4 class="mb-1 pt-2">Get started with SPromoter</h4>
-                        <p class="mb-4">Make your review management easy!</p>
+                        <h4 class="">Get started with SPromoter</h4>
+                        <p class="">Make your review management easy!</p>
 
-                        <form id="formAuthentication" class="mb-3" method="POST">
+                        <form id="formAuthentication" method="POST">
 							<?= wp_nonce_field( 'spromoter_registration_form' ); ?>
-                            <div class="mb-3">
+                            <div>
                                 <label for="first_name" class="form-label">First Name</label>
                                 <input
                                         type="text"
-                                        class="form-control"
+                                        class="spromoter-form-input"
                                         id="first_name"
                                         name="first_name"
                                         placeholder="Enter your first name"
@@ -38,11 +38,11 @@ function spromoter_display_register_page() {
                                         value="<?= $first_name ?>"
                                 />
                             </div>
-                            <div class="mb-3">
+                            <div>
                                 <label for="last_name" class="form-label">Last Name</label>
                                 <input
                                         type="text"
-                                        class="form-control"
+                                        class="spromoter-form-input"
                                         id="last_name"
                                         name="last_name"
                                         placeholder="Enter your last name"
@@ -51,18 +51,19 @@ function spromoter_display_register_page() {
                                 />
                             </div>
 
-                            <div class="mb-3">
+                            <div>
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="email" name="email"
+                                <input type="text" class="spromoter-form-input" id="email" name="email"
                                        placeholder="Enter your email" value="<?= $email ?>" required/>
                             </div>
-                            <div class="mb-3 form-password-toggle">
+
+                            <div class="form-password-toggle">
                                 <label class="form-label" for="password">Password</label>
                                 <div class="input-group input-group-merge">
                                     <input
                                             type="password"
                                             id="password"
-                                            class="form-control"
+                                            class="spromoter-form-input"
                                             name="password"
                                             placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                             aria-describedby="password"
@@ -71,13 +72,14 @@ function spromoter_display_register_page() {
                                     />
                                 </div>
                             </div>
-                            <div class="mb-3 form-password-toggle">
+
+                            <div class="form-password-toggle">
                                 <label class="form-label" for="confirmation_password">Confirm Password</label>
                                 <div class="input-group input-group-merge">
                                     <input
                                             type="password"
                                             id="confirmation_password"
-                                            class="form-control"
+                                            class="spromoter-form-input"
                                             name="confirmation_password"
                                             placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                             aria-describedby="confirmation_password"
@@ -87,8 +89,7 @@ function spromoter_display_register_page() {
                                 </div>
                             </div>
 
-
-                            <button class="btn btn-primary d-grid w-100">Sign up</button>
+                            <button class="spromoter-button">Sign up</button>
                         </form>
 
                         <form method="post">
@@ -102,7 +103,6 @@ function spromoter_display_register_page() {
                         </form>
                     </div>
                 </div>
-                <!-- Register Card -->
             </div>
         </div>
     </div>
@@ -118,19 +118,21 @@ function spromoter_display_settings_page() {
 	$disable_native_review_system = $spromoter_settings['disable_native_review_system'];
 	?>
     <div class="spromoter-wrapper">
-        <div class="authentication-wrapper authentication-basic container-p-y">
-            <div class="authentication-inner py-4">
-                <!-- Register Card -->
-                <div class="card">
+        <div class="spromoter-authentication-bg-shape" style="background-image: url('<?= spromoter_background_shape_url() ?>')"></div>
+
+        <div class="authentication-wrapper">
+            <div class="authentication-inner">
+                <div class="spromoter-settings-card">
                     <div class="card-body">
-                        <form id="formAuthentication" class="mb-3" method="POST">
+                        <form id="formAuthentication" method="POST">
 		                    <?= wp_nonce_field( 'spromoter_settings_form' ); ?>
                             <input type="hidden" name="page_type" value="settings">
-                            <div class="mb-3">
+
+                            <div>
                                 <label for="app_id" class="form-label">APP ID</label>
                                 <input
                                         type="text"
-                                        class="form-control"
+                                        class="spromoter-form-input"
                                         id="app_id"
                                         name="app_id"
                                         placeholder="Enter app id"
@@ -139,11 +141,12 @@ function spromoter_display_settings_page() {
                                         value="<?= $app_id ?>"
                                 />
                             </div>
-                            <div class="mb-3">
+
+                            <div>
                                 <label for="api_key" class="form-label">API Key</label>
                                 <input
                                         type="text"
-                                        class="form-control"
+                                        class="spromoter-form-input"
                                         id="api_key"
                                         name="api_key"
                                         placeholder="Enter api key"
@@ -152,7 +155,7 @@ function spromoter_display_settings_page() {
                                 />
                             </div>
 
-                            <div class="mt-3">
+                            <div>
                                 <label for="order_status" class="form-label">Order Status</label>
                                 <select name="order_status" id="order_status" class="form-select w-100">
                                     <option value="completed" <?= selected('completed', $order_status, false) ?>>Completed</option>
@@ -164,7 +167,7 @@ function spromoter_display_settings_page() {
                                 </select>
                             </div>
 
-                            <div class="form-check mt-3">
+                            <div class="form-check">
                                 <input
                                         type="checkbox"
                                         name="disable_native_review_system"
@@ -176,7 +179,7 @@ function spromoter_display_settings_page() {
                                 <label class="form-check-label" for="disable_native_review_system"> Disable native reviews system </label>
                             </div>
 
-                            <button class="btn btn-primary d-grid w-100 mt-3">Save Changes</button>
+                            <button class="spromoter-button">Save Changes</button>
                         </form>
                     </div>
                 </div>

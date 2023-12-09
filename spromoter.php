@@ -40,7 +40,7 @@ function spromoter_init()
 		}
 	}elseif(spromoter_compatible() && !empty($spromoter_settings['api_key']) && !empty($spromoter_settings['app_id'])){
 		add_action('template_redirect', 'spromoter_frontend_init');
-
+		
 		add_action('wp_enqueue_scripts', 'spromoter_front_styles');
 		add_action('wp_enqueue_scripts', 'spromoter_front_scripts');
 	}
@@ -173,9 +173,8 @@ function spromoter_uninstall()
 
 function spromoter_admin_styles()
 {
-	wp_enqueue_style('spromoter-bootstrap-styles', plugins_url('assets/css/spromoter-bootstrap.css', __FILE__));
-	wp_enqueue_style('spromoter-auth-styles', plugins_url('assets/css/spromoter-auth.css', __FILE__));
 	wp_enqueue_style('spromoter-main-styles', plugins_url('assets/css/spromoter-main.css', __FILE__));
+	wp_enqueue_style('spromoter-auth-styles', plugins_url('assets/css/spromoter-auth.css', __FILE__));
 }
 
 function spromoter_admin_scripts()
@@ -221,6 +220,11 @@ function spromoter_get_logo_url()
 function spromoter_get_small_logo_url()
 {
 	return plugins_url('assets/images/small-logo.jpg', __FILE__);
+}
+
+function spromoter_background_shape_url()
+{
+	return plugins_url('assets/images/shape.png', __FILE__);
 }
 
 function declare_hops_support() {
