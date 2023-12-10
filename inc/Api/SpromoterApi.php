@@ -63,15 +63,12 @@ class SpromoterApi {
 		}
 	}
 
-	public function getReviews() {
+	public function registerUser( $data = array() ) {
 		// Send request to SPromoter API
-		$result = $this->sendRequest('reviews', 'GET', array(
-			'app_id' => $this->app_id,
-		));
+		$result = $this->sendRequest('auth/register', 'POST', $data);
 
 		// Check response
 		$response = json_decode($result, true);
-
 		if ($response['status'] == 'success') {
 			return $response['data'];
 		} else {

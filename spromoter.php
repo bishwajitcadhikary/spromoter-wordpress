@@ -49,17 +49,17 @@ function spromoter_init()
 
 function spromoter_frontend_init()
 {
-//	$spromoter_settings = get_option('spromoter_settings', spromoter_get_default_settings());
-//	add_action('woocommerce_thankyou', 'spromoter_wc_on_thank_you');
-//
-//	if (is_product()){
-//		spromoter_widgets_render_in_tabs();
-//		//spromoter_widgets_render_in_bottom_line();
-//
-//		if ($spromoter_settings['disable_native_review_system']){
-//			add_filter( 'comments_open', 'spromoter_remove_native_review_system', null, 2 );
-//		}
-//	}
+	$spromoter_settings = get_option('spromoter_settings', spromoter_get_default_settings());
+	add_action('woocommerce_thankyou', 'spromoter_wc_on_thank_you');
+
+	if (is_product()){
+		spromoter_widgets_render_in_tabs();
+		spromoter_widgets_render_in_bottom_line();
+
+		if ($spromoter_settings['disable_native_review_system']){
+			add_filter( 'comments_open', 'spromoter_remove_native_review_system', null, 2 );
+		}
+	}
 }
 function spromoter_activate()
 {

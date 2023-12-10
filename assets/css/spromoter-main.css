@@ -185,7 +185,11 @@ input[type="radio"] {
 }
 
 .spromoter-ratings .bi-star-fill,
-.spromoter-ratings .bi-star-half {
+.spromoter-ratings .bi-star-half,
+.spromoter-ratings .bi-star,
+.spromoter-bottom-line-rating .bi-star-fill,
+.spromoter-bottom-line-rating .bi-star-half,
+.spromoter-bottom-line-rating .bi-star {
 	color: #ffc107;
 }
 

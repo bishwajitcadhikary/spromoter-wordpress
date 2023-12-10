@@ -53,17 +53,17 @@ function spromoter_show_main_widget_in_bottom_line(){
 		$spromoter_settings = spromoter_get_settings();
 		$product_data = spromoter_get_product_data($product);
 
-		/*echo "<script>
+		echo "<script>
 		       jQuery(document).ready(function() {
-			       jQuery('div.bottomLine').click(function() {
-				       if (jQuery('li.yotpo_widget_tab>a').length) { jQuery('li.yotpo_widget_tab>a').click(); }
+			       jQuery('div.spromoter-bottom-line').click(function() {
+				       if (jQuery('li.spromoter_main_widget_tab>a').length) { jQuery('li.spromoter_main_widget_tab>a').click(); }
 			       })
 			})
 		</script>
-		<div class='yotpo bottomLine' 
+		<div class='spromoter-bottom-line' 
 			data-product-id='".$product_data['id']."'
 			data-url='".$product_data['url']."' 
 			data-lang='".$product_data['lang']."'
-			                                ></div>";*/
+			                                ></div>";
 	}
 }

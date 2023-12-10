@@ -17,6 +17,10 @@ function spromoter_display_admin_page(){
 			} elseif ($_POST['page_type'] == 'login'){
 				spromoter_display_settings_page();
 			}else{
+				if (isset($_POST['page_type']) && $_POST['page_type'] == 'register') {
+					spromoter_register_user();
+				}
+
 				spromoter_display_register_page();
 			}
 		}else{

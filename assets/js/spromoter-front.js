@@ -71,6 +71,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         createReviewContainers(reviews);
+
+        createBottomLine(data.data?.average_rating);
     });
 
     // Submit new review
@@ -123,6 +125,35 @@ document.addEventListener('DOMContentLoaded', function () {
             ratings: ratings,
             comment: review.comment
         }
+    }
+
+    function createBottomLine(rating) {
+        let bottomLine = document.querySelector('.spromoter-bottom-line');
+
+        // Add rating
+        let stars = '';
+        for (let i = 0; i < 5; i++) {
+            // Check if rating is float
+            if (rating % 1 !== 0 && i === Math.floor(rating)) {
+                stars += '<i class="bi bi-star-half"></i>';
+            }else if (i < rating) {
+                stars += '<i class="bi bi-star-fill"></i>';
+            } else {
+                stars += '<i class="bi bi-star"></i>';
+            }
+        }
+        let bottomLineStars = document.createElement('div');
+        bottomLineStars.classList.add('spromoter-bottom-line-rating');
+        bottomLineStars.innerHTML = stars;
+        bottomLine.appendChild(bottomLineStars);
+
+
+        // Add write review button
+        let writeReviewButton = document.createElement('a');
+        writeReviewButton.classList.add('spromoter-write-review');
+        writeReviewButton.innerText = 'Write a review';
+        writeReviewButton.href = '#spromoter-reviews-form';
+        bottomLine.appendChild(writeReviewButton);
     }
 
     // Review Form
@@ -190,8 +221,14 @@ document.addEventListener('DOMContentLoaded', function () {
             // Prepend new review
             appendReview(review, true);
 
-            // Remove form
-            reviewFormWrapper.innerHTML = "<div class='spromoter-success-message'>Thank you for your review!</div>";
+            // Hide form
+            reviewForm.style.display = 'none';
+
+            // Show success message
+            let successMessage = document.createElement('div');
+            successMessage.classList.add('spromoter-success-message');
+            successMessage.innerText = 'Thank you for your review!';
+            reviewFormWrapper.appendChild(successMessage);
         });
     });
 
