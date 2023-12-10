@@ -8,23 +8,20 @@ function spromoter_display_register_page() {
 	$email      = isset( $_POST['email'] ) ? $_POST['email'] : '';
 	?>
     <div class="spromoter-wrapper">
-        <div class="authentication-wrapper authentication-basic container-p-y">
-            <div class="authentication-inner py-4">
-                <!-- Register Card -->
-                <div class="card">
+        <div class="authentication-wrapper">
+            <div class="authentication-inner">
+                <div class="spromoter-settings-card">
                     <div class="card-body">
                         <!-- Logo -->
                         <a href="#" class="spromoter-brand">
                             <img src="<?= spromoter_get_logo_url() ?>" alt="Brand Logo">
                         </a>
-
-                        <!-- /Logo -->
-                        <h4 class="">Get started with SPromoter</h4>
-                        <p class="">Make your review management easy!</p>
+                        <h2 class="mb-2">Get started with SPromoter</h2>
+                        <p class="mb-4">Make your review management easy!</p>
 
                         <form id="formAuthentication" method="POST">
 							<?= wp_nonce_field( 'spromoter_registration_form' ); ?>
-                            <div>
+                            <div class="mb-3">
                                 <label for="first_name" class="spromoter-form-label mb-2">First Name</label>
                                 <input
                                         type="text"
@@ -37,7 +34,7 @@ function spromoter_display_register_page() {
                                         value="<?= $first_name ?>"
                                 />
                             </div>
-                            <div>
+                            <div class="mb-3">
                                 <label for="last_name" class="spromoter-form-label mb-2">Last Name</label>
                                 <input
                                         type="text"
@@ -50,13 +47,13 @@ function spromoter_display_register_page() {
                                 />
                             </div>
 
-                            <div>
+                            <div class="mb-3">
                                 <label for="email" class="spromoter-form-label mb-2">Email</label>
                                 <input type="text" class="spromoter-form-input" id="email" name="email"
                                        placeholder="Enter your email" value="<?= $email ?>" required/>
                             </div>
 
-                            <div class="form-password-toggle">
+                            <div class="form-password-toggle mb-3">
                                 <label class="spromoter-form-label mb-2" for="password">Password</label>
                                 <div class="input-group input-group-merge">
                                     <input
@@ -64,7 +61,7 @@ function spromoter_display_register_page() {
                                             id="password"
                                             class="spromoter-form-input"
                                             name="password"
-                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                            placeholder=""
                                             aria-describedby="password"
                                             required
                                             min="8"
@@ -72,7 +69,7 @@ function spromoter_display_register_page() {
                                 </div>
                             </div>
 
-                            <div class="form-password-toggle">
+                            <div class="form-password-toggle mb-4">
                                 <label class="spromoter-form-label mb-2" for="confirmation_password">Confirm Password</label>
                                 <div class="input-group input-group-merge">
                                     <input
@@ -80,7 +77,7 @@ function spromoter_display_register_page() {
                                             id="confirmation_password"
                                             class="spromoter-form-input"
                                             name="confirmation_password"
-                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                            placeholder=""
                                             aria-describedby="confirmation_password"
                                             required
                                             min="8"
@@ -88,14 +85,14 @@ function spromoter_display_register_page() {
                                 </div>
                             </div>
 
-                            <button class="spromoter-button">Sign up</button>
+                            <button class="spromoter-button mb-3 w-100">Sign up</button>
                         </form>
 
                         <form method="post">
                             <input type="hidden" name="page_type" value="login">
                             <p class="text-center">
                                 <span>Already have an account?</span>
-                                <button type="submit" class="btn btn-secondary">
+                                <button type="submit" class="spromoter-button-link">
                                     Configure Here
                                 </button>
                             </p>
