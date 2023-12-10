@@ -1,31 +1,22 @@
 .spromoter-wrapper {
 	position: relative;
+	overflow: hidden;
+}
+
+.authentication-wrapper {
+	position: relative;
 	z-index: 1;
 	width: 100%;
-	min-height: 90vh;
-}
-
-.spromoter-authentication-bg-shape {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	z-index: -100;
-	top: 0;
-	left: 0;
-	background-repeat: repeat;
-}
-
-.authentication-wrapper .authentication-inner {
-	width: 100%;
+	min-height: 88vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.spromoter-settings-card {
-	padding: 2.5rem;
-	background-color: #fff;
-	border-radius: 1rem;
-	box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-	min-width: 25rem;
+.spromoter-authentication-bg-shape {
+	position: absolute;
+	z-index: -100;
+	right: 1rem;
+	bottom: 1rem;
+	max-width: 24rem;
 }

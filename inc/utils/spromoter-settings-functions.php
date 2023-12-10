@@ -14,11 +14,10 @@ function spromoter_display_register_page() {
                 <div class="card">
                     <div class="card-body">
                         <!-- Logo -->
-                        <div class="app-brand justify-content-center">
-                            <a href="#" class="app-brand-link">
-                                <img src="<?= spromoter_get_logo_url() ?>" alt="Brand Logo" style="width: 100%;">
-                            </a>
-                        </div>
+                        <a href="#" class="spromoter-brand">
+                            <img src="<?= spromoter_get_logo_url() ?>" alt="Brand Logo">
+                        </a>
+
                         <!-- /Logo -->
                         <h4 class="">Get started with SPromoter</h4>
                         <p class="">Make your review management easy!</p>
@@ -26,7 +25,7 @@ function spromoter_display_register_page() {
                         <form id="formAuthentication" method="POST">
 							<?= wp_nonce_field( 'spromoter_registration_form' ); ?>
                             <div>
-                                <label for="first_name" class="form-label">First Name</label>
+                                <label for="first_name" class="spromoter-form-label mb-2">First Name</label>
                                 <input
                                         type="text"
                                         class="spromoter-form-input"
@@ -39,7 +38,7 @@ function spromoter_display_register_page() {
                                 />
                             </div>
                             <div>
-                                <label for="last_name" class="form-label">Last Name</label>
+                                <label for="last_name" class="spromoter-form-label mb-2">Last Name</label>
                                 <input
                                         type="text"
                                         class="spromoter-form-input"
@@ -52,13 +51,13 @@ function spromoter_display_register_page() {
                             </div>
 
                             <div>
-                                <label for="email" class="form-label">Email</label>
+                                <label for="email" class="spromoter-form-label mb-2">Email</label>
                                 <input type="text" class="spromoter-form-input" id="email" name="email"
                                        placeholder="Enter your email" value="<?= $email ?>" required/>
                             </div>
 
                             <div class="form-password-toggle">
-                                <label class="form-label" for="password">Password</label>
+                                <label class="spromoter-form-label mb-2" for="password">Password</label>
                                 <div class="input-group input-group-merge">
                                     <input
                                             type="password"
@@ -74,7 +73,7 @@ function spromoter_display_register_page() {
                             </div>
 
                             <div class="form-password-toggle">
-                                <label class="form-label" for="confirmation_password">Confirm Password</label>
+                                <label class="spromoter-form-label mb-2" for="confirmation_password">Confirm Password</label>
                                 <div class="input-group input-group-merge">
                                     <input
                                             type="password"
@@ -118,18 +117,27 @@ function spromoter_display_settings_page() {
 	$disable_native_review_system = $spromoter_settings['disable_native_review_system'];
 	?>
     <div class="spromoter-wrapper">
-        <div class="spromoter-authentication-bg-shape" style="background-image: url('<?= spromoter_background_shape_url() ?>')"></div>
+        <div class="spromoter-authentication-bg-shape">
+            <img src="<?= spromoter_background_shape_url() ?>" alt="">
+        </div>
 
         <div class="authentication-wrapper">
             <div class="authentication-inner">
                 <div class="spromoter-settings-card">
                     <div class="card-body">
+                        <!-- Logo -->
+                        <a href="#" class="spromoter-brand">
+                            <img src="<?= spromoter_get_logo_url() ?>" alt="Brand Logo">
+                        </a>
+
+                        <h2 class="mb-4">Configure your settings!</h2>
+
                         <form id="formAuthentication" method="POST">
 		                    <?= wp_nonce_field( 'spromoter_settings_form' ); ?>
                             <input type="hidden" name="page_type" value="settings">
 
-                            <div>
-                                <label for="app_id" class="form-label">APP ID</label>
+                            <div class="mb-3">
+                                <label for="app_id" class="spromoter-form-label mb-2">APP ID</label>
                                 <input
                                         type="text"
                                         class="spromoter-form-input"
@@ -142,8 +150,8 @@ function spromoter_display_settings_page() {
                                 />
                             </div>
 
-                            <div>
-                                <label for="api_key" class="form-label">API Key</label>
+                            <div class="mb-3">
+                                <label for="api_key" class="spromoter-form-label mb-2">API Key</label>
                                 <input
                                         type="text"
                                         class="spromoter-form-input"
@@ -155,9 +163,9 @@ function spromoter_display_settings_page() {
                                 />
                             </div>
 
-                            <div>
-                                <label for="order_status" class="form-label">Order Status</label>
-                                <select name="order_status" id="order_status" class="form-select w-100">
+                            <div class="mb-3">
+                                <label for="order_status" class="spromoter-form-label mb-2">Order Status</label>
+                                <select name="order_status" id="order_status" class="spromoter-form-input">
                                     <option value="completed" <?= selected('completed', $order_status, false) ?>>Completed</option>
                                     <option value="processing" <?= selected('processing', $order_status, false) ?>>Processing</option>
                                     <option value="on-hold" <?= selected('on-hold', $order_status, false) ?>>On Hold</option>
@@ -167,19 +175,19 @@ function spromoter_display_settings_page() {
                                 </select>
                             </div>
 
-                            <div class="form-check">
+                            <div class="spromoter-form-check ps-0 mb-4">
                                 <input
                                         type="checkbox"
                                         name="disable_native_review_system"
                                         id="disable_native_review_system"
-                                        class="form-check-input"
+                                        class="spromoter-form-check-input"
                                         value="1"
 			                        <?php echo checked($disable_native_review_system) ?>
                                 >
-                                <label class="form-check-label" for="disable_native_review_system"> Disable native reviews system </label>
+                                <label class="spromoter-form-check-label" for="disable_native_review_system"> Disable native reviews system </label>
                             </div>
 
-                            <button class="spromoter-button">Save Changes</button>
+                            <button class="spromoter-button w-100">Save Changes</button>
                         </form>
                     </div>
                 </div>
