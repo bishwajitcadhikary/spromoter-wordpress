@@ -4,7 +4,7 @@ require __DIR__.'/../inc/utils/spromoter-settings-functions.php';
 
 function spromoter_display_admin_page(){
 	if (function_exists('current_user_can') && !current_user_can('manage_options')) {
-		die(__(''));
+		die(__('You do not have sufficient permissions to access this page.'));
 	}
 
 	if (spromoter_compatible()){
@@ -23,6 +23,7 @@ function spromoter_display_admin_page(){
 			if (isset($_POST['page_type']) && $_POST['page_type'] == 'settings') {
 				spromoter_save_settings();
 			}
+
 			spromoter_display_settings_page();
 		}
 	} else{

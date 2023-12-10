@@ -14,7 +14,7 @@ function spromoter_display_register_page() {
                     <div class="card-body">
                         <!-- Logo -->
                         <a href="#" class="spromoter-brand">
-                            <img src="<?= spromoter_get_logo_url() ?>" alt="Brand Logo">
+                            <img src="<?= spromoter_get_image_url('logo.png') ?>" alt="SPromoter">
                         </a>
                         <h2 class="mb-2">Get started with SPromoter</h2>
                         <p class="mb-4">Make your review management easy!</p>
@@ -112,10 +112,11 @@ function spromoter_display_settings_page() {
 	$api_key = $spromoter_settings['api_key'];
     $order_status = $spromoter_settings['order_status'];
 	$disable_native_review_system = $spromoter_settings['disable_native_review_system'];
+    $enable_bottom_line_widget = $spromoter_settings['show_bottom_line_widget'];
 	?>
     <div class="spromoter-wrapper">
         <div class="spromoter-authentication-bg-shape">
-            <img src="<?= spromoter_background_shape_url() ?>" alt="">
+            <img src="<?= spromoter_get_image_url('shape.png') ?>" alt="SPromoter">
         </div>
 
         <div class="authentication-wrapper">
@@ -124,7 +125,7 @@ function spromoter_display_settings_page() {
                     <div class="card-body">
                         <!-- Logo -->
                         <a href="#" class="spromoter-brand">
-                            <img src="<?= spromoter_get_logo_url() ?>" alt="Brand Logo">
+                            <img src="<?= spromoter_get_image_url('logo.png') ?>" alt="SPromoter">
                         </a>
 
                         <h2 class="mb-4">Configure your settings!</h2>
@@ -184,6 +185,18 @@ function spromoter_display_settings_page() {
                                 <label class="spromoter-form-check-label" for="disable_native_review_system"> Disable native reviews system </label>
                             </div>
 
+                            <div class="spromoter-form-check ps-0 mb-4">
+                                <input
+                                        type="checkbox"
+                                        name="show_bottom_line_widget"
+                                        id="show_bottom_line_widget"
+                                        class="spromoter-form-check-input"
+                                        value="1"
+			                        <?php echo checked($enable_bottom_line_widget) ?>
+                                >
+                                <label class="spromoter-form-check-label" for="show_bottom_line_widget"> Enable button line in product page </label>
+                            </div>
+
                             <button class="spromoter-button w-100">Save Changes</button>
                         </form>
                     </div>
@@ -202,6 +215,8 @@ function spromoter_save_settings(){
         $spromoter_settings['api_key'] = $_POST['api_key'];
         $spromoter_settings['order_status'] = $_POST['order_status'];
         $spromoter_settings['disable_native_review_system'] = ($_POST['disable_native_review_system'] == '1');
+        $spromoter_settings['show_bottom_line_widget'] = ($_POST['show_bottom_line_widget'] == '1');
+
         // Check credentials
         // $spromoter = new SpromoterApi();
         // $authenticated = $spromoter->checkCredentials($_POST['api_key'], $_POST['app_id']);
