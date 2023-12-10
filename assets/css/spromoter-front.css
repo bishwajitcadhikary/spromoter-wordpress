@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
 	font-display: block;
 	font-family: "bootstrap-icons";
 	src: url("./../font/bootstrap-icons.woff2") format("woff2"),
@@ -36,7 +36,6 @@
 	content: "\f589";
 }
 
-/* Reviews */
 
 .spromoter-single-review {
 	position: relative;
@@ -128,7 +127,6 @@
 	font-weight: 600;
 }
 
-/* Forms */
 
 .spromoter-review-form {
 	margin-top: 5rem;
@@ -159,7 +157,6 @@ textarea.spromoter-form-input {
 	min-height: 120px;
 }
 
-/* Rating Stars */
 .spromoter-rating-text {
 	margin-bottom: 0.5rem;
 	font-size: 1.25rem;
@@ -302,4 +299,4 @@ textarea.spromoter-form-input {
 .spromoter-button:hover,
 .spromoter-button:focus {
 	background-color: #0b5ed7;
-}
+} */
