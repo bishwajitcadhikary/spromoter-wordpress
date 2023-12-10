@@ -109,3 +109,20 @@ function spromoter_get_order_currency( $order ) {
 
 	return '';
 }
+
+function spromoter_get_product_image_url($product_id) {
+	return wp_get_attachment_url(get_post_thumbnail_id($product_id));
+}
+
+function spromoter_debug($msg, $name = '', $date = true) {
+	if (!spromoter_get_settings()['debug_mode']) {
+		return;
+	}
+	$name = $name ?: debug_backtrace()[1]['function'];
+	$error_dir = plugin_dir_path(__FILE__) . 'spromoter_debug.log';
+	$msg = print_r($msg, true);
+	$log = ($date ? "[" . date('m/d/Y @ g:i:sA', time()) . "] " : "") . $name . ' ' . $msg . "\n";
+	file_put_contents($error_dir, $log, FILE_APPEND);
+}
+
+ob_start('fatal_error_handler');

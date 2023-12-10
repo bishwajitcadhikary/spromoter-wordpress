@@ -18,6 +18,7 @@ register_deactivation_hook(__FILE__, 'spromoter_deactivate');
 register_uninstall_hook(__FILE__, 'spromoter_uninstall');
 add_action('plugins_loaded', 'spromoter_init');
 add_action('before_woocommerce_init', 'declare_hops_support');
+add_action('woocommerce_order_status_changed', 'spromoter_wc_on_order_status_changed');
 
 require plugin_dir_path( __FILE__ ) . 'inc/utils/spromoter-defaults.php';
 require plugin_dir_path( __FILE__ ) . 'inc/utils/spromoter-functions.php';
@@ -31,6 +32,16 @@ function spromoter_init()
 	$spromoter_settings = get_option('spromoter_settings', spromoter_get_default_settings());
 
 	if ($is_admin) {
+		// Export reviews
+		if (isset($_POST['export_reviews']) && $_POST['export_reviews']) {
+			require plugin_dir_path(__FILE__) . 'classes/class-spromoter-export-reviews.php';
+			$exporter = new SPromoterReviewExport();
+			list($file_name, $error) = $exporter->exportReviews();
+			if (is_null($error)){
+				$exporter->downloadReviews($file_name);
+			}
+			exit();
+		}
 
 		require ( plugin_dir_path( __FILE__ ) . 'templates/spromoter-settings.php' );
 		add_action('admin_menu', 'spromoter_admin_settings');
@@ -58,6 +69,64 @@ function spromoter_frontend_init()
 
 		if ($spromoter_settings['disable_native_review_system']){
 			add_filter( 'comments_open', 'spromoter_remove_native_review_system', null, 2 );
+		}
+	}
+}
+
+function spromoter_wc_on_order_status_changed($order_id){
+	do_action('woocommerce_init');
+
+	$order = wc_get_order($order_id);
+	$orderStatus = $order->get_status();
+
+	$settings = spromoter_get_settings();
+
+	if ($orderStatus == $settings['order_status']){
+		$apiKey = $settings['api_key'];
+		$appId = $settings['app_id'];
+
+		if (!empty($apiKey) && !empty($appId) && spromoter_compatible()){
+			require plugin_dir_path(__FILE__) . 'classes/class-spromoter-export-reviews.php';
+
+			$spromoter = new SpromoterApi();
+
+			$items = array();
+			foreach($order->get_items() as $item_id => $item) {
+				$product = wc_get_product($item['product_id']);
+				$items[] = array(
+					'name' => $product->get_name(),
+					'image' => spromoter_get_product_image_url($product->get_id()),
+					'url' => $product->get_permalink(),
+					'description' => wp_strip_all_tags($product->get_description()),
+					'price' => $product->get_price(),
+					'specs' => array(
+						'sku' => $product->get_sku(),
+						'upc' => $product->get_attribute('upc'),
+						'ean' => $product->get_attribute('ean'),
+						'isbn' => $product->get_attribute('isbn'),
+						'asin' => $product->get_attribute('asin'),
+						'gtin' => $product->get_attribute('gtin'),
+						'mpn' => $product->get_attribute('mpn'),
+						'brand' => $product->get_attribute('brand'),
+					)
+				);
+			}
+
+			$orderData = [
+				'customer_name' => $order->get_billing_first_name() . ' ' . $order->get_billing_last_name(),
+				'customer_email' => $order->get_billing_email(),
+				'order_id' => $order->get_id(),
+				'order_date' => $order->get_date_created()->format('Y-m-d H:i:s'),
+				'currency' => $order->get_currency(),
+				'items' => $items,
+			];
+
+			$response = $spromoter->createOrder($orderData);
+
+			if(!$response){
+				spromoter_debug( 'Error while sending order data to SPromoter API', 'spromoter_wc_on_order_status_changed' );
+			}
+
 		}
 	}
 }

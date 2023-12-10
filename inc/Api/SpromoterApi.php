@@ -10,7 +10,7 @@ class SpromoterApi {
 	protected $headers = array();
 
 	public function __construct() {
-		$spromoter_settings = get_option('spromoter_settings', spromoter_get_default_settings());
+		$spromoter_settings = spromoter_get_settings();
 
 		$this->api_key = $spromoter_settings['api_key'];
 		$this->app_id = $spromoter_settings['app_id'];
@@ -71,6 +71,18 @@ class SpromoterApi {
 		$response = json_decode($result, true);
 		if ($response['status'] == 'success') {
 			return $response['data'];
+		} else {
+			return false;
+		}
+	}
+
+	public function createOrder( $data = array() ) {
+
+		$result = $this->sendRequest('orders/'. $this->app_id, 'POST', $data);
+
+		$response = json_decode($result, true);
+		if ($response['status'] == 'success') {
+			return true;
 		} else {
 			return false;
 		}

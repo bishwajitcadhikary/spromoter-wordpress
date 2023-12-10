@@ -19,7 +19,7 @@ function spromoter_display_register_page() {
                         <h2 class="mb-2">Get started with SPromoter</h2>
                         <p class="mb-4">Make your review management easy!</p>
 
-                        <form id="formAuthentication" method="POST">
+                        <form id="spromoterRegisterForm" method="POST">
 							<?= wp_nonce_field( 'spromoter_registration_form' ); ?>
                             <input type="hidden" name="page_type" value="register">
                             <div class="mb-3">
@@ -132,7 +132,7 @@ function spromoter_display_settings_page() {
 
                         <h2 class="mb-4">Configure your settings!</h2>
 
-                        <form id="formAuthentication" method="POST">
+                        <form id="spromoterSettingsForm" method="POST">
 							<?= wp_nonce_field( 'spromoter_settings_form' ); ?>
                             <input type="hidden" name="page_type" value="settings">
 
@@ -210,9 +210,17 @@ function spromoter_display_settings_page() {
                                 <label class="spromoter-form-check-label" for="show_bottom_line_widget"> Enable button
                                     line in product page </label>
                             </div>
-
-                            <button class="spromoter-button w-100">Save Changes</button>
                         </form>
+
+                        <form method="POST" id="spromoterExportForm">
+                            <?= wp_nonce_field( 'spromoter_export_form' ); ?>
+                            <input type="hidden" name="export_reviews" value="true">
+                        </form>
+
+                        <div style="display: flex; justify-content: space-between">
+                            <button type="submit" class="spromoter-export-button" form="spromoterExportForm">Export Reviews</button>
+                            <button type="submit" class="spromoter-button" form="spromoterSettingsForm">Save Changes</button>
+                        </div>
                     </div>
                 </div>
             </div>

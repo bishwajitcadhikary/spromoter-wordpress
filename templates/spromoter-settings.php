@@ -7,35 +7,42 @@ function spromoter_display_admin_page(){
 		die(__('You do not have sufficient permissions to access this page.'));
 	}
 
-	if (spromoter_compatible()){
+	// Check if SPromoter is compatible
+	if (spromoter_compatible()) {
 		$spromoter = get_option('spromoter_settings', spromoter_get_default_settings());
 
-		if (empty($spromoter['app_id']) && empty($spromoter['api_key'])){
-			if (isset($_POST['page_type']) && $_POST['page_type'] == 'settings') {
-				spromoter_save_settings();
-				spromoter_display_settings_page();
-			} elseif ($_POST['page_type'] == 'login'){
-				spromoter_display_settings_page();
-			}else{
-				if (isset($_POST['page_type']) && $_POST['page_type'] == 'register') {
+		// Check if app_id and api_key are empty
+		if (empty($spromoter['app_id']) && empty($spromoter['api_key'])) {
+			// Check if page_type is set in POST
+			if (isset($_POST['page_type'])) {
+				// Handle settings and registration based on page_type
+				if ($_POST['page_type'] == 'settings') {
+					spromoter_save_settings();
+					spromoter_display_settings_page();
+				} elseif ($_POST['page_type'] == 'register') {
 					spromoter_register_user();
 				}
-
+			} else {
+				// Display registration page if page_type is not set
 				spromoter_display_register_page();
 			}
-		}else{
+		} else {
+			// Save settings if page_type is set to 'settings'
 			if (isset($_POST['page_type']) && $_POST['page_type'] == 'settings') {
 				spromoter_save_settings();
 			}
 
+			// Always display settings page
 			spromoter_display_settings_page();
 		}
-	} else{
-		if (version_compare(phpversion(), '5.2.0') < 0){
+	} else {
+		// Check PHP version requirement
+		if (version_compare(phpversion(), '5.2.0') < 0) {
 			echo '<div class="error"><p>' . __('SPromoter requires PHP 5.2.0 or higher. Please upgrade PHP to use this plugin.') . '</p></div>';
 		}
 
-		if (!function_exists('curl_init')){
+		// Check for the existence of CURL extension
+		if (!function_exists('curl_init')) {
 			echo '<div class="error"><p>' . __('SPromoter requires the CURL PHP extension. Please install or enable CURL.') . '</p></div>';
 		}
 	}
