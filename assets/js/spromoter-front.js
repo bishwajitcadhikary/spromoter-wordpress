@@ -1,11 +1,11 @@
 class Spromoter {
     constructor() {
         this.baseUrl = 'http://spromoter.test/api/v1/';
-        this.appId = document.querySelector('.spromoter-container') ? .dataset.spromoterAppId;
+        this.appId = document.querySelector('.spromoter-container') ?.dataset.spromoterAppId;
     }
-
+    
     // Get reviews
-    getReviews() {
+    getReviews(){
         return fetch(this.baseUrl + `${this.appId}/reviews`, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -15,8 +15,6 @@ class Spromoter {
             })
             .then(function (response) {
                 if (!response.ok) {
-                    console.log(response);
-
                     return Promise.reject(response);
                 }
 
@@ -67,12 +65,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let reviews = spromoter.getReviews()
 
     reviews.then(function (data) {
-        let reviews = data.data ? .reviews.map(function (review) {
-            return createReviewData(review)
-        });
+        let reviews = data.data?.reviews.map(function (review) {
+            return createReviewData(review);
+        })
 
         createReviewContainers(reviews);
-        createBottomLine(data.data ? .average_rating);
+        createBottomLine(data.data ?.average_rating);
     });
 
     // Submit new review
@@ -126,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function createBottomLine(rating) {
+    function createBottomLine(rating) {        
         let bottomLine = document.querySelector('.spromoter-bottom-line');
 
         // Add rating
@@ -231,18 +229,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    let singleReviewItems = document.querySelectorAll('.spromoter-single-review');
 
-    singleReviewItems.forEach(function (item) {
-        item.addEventListener('mouseover', function () {
-            removeActiveClass();
-            item.classList.add('active');
-        });
-    });
 
-    function removeActiveClass() {
-        singleReviewItems.forEach(function (item) {
-            item.classList.remove('active');
-        });
-    }
+    // document.querySelector('.spromoter-write-review').addEventListener('click', function() {
+    //     document.querySelector('.spromoter-review-form').style.display = "block";
+    // })
+
 });
