@@ -124,5 +124,3 @@ function spromoter_debug($msg, $name = '', $date = true) {
 	$log = ($date ? "[" . date('m/d/Y @ g:i:sA', time()) . "] " : "") . $name . ' ' . $msg . "\n";
 	file_put_contents($error_dir, $log, FILE_APPEND);
 }
-
-ob_start('fatal_error_handler');

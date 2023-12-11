@@ -5,7 +5,7 @@ namespace Spromoter\Api;
 class SpromoterApi {
 	protected $api_key = '';
 	protected $app_id = '';
-	protected $api_url = 'https://spromoter.test/api/v1/';
+	protected $api_url = 'http://spromoter.test/api/v1/';
 
 	protected $headers = array();
 
@@ -69,6 +69,7 @@ class SpromoterApi {
 
 		// Check response
 		$response = json_decode($result, true);
+
 		if ($response['status'] == 'success') {
 			return $response['data'];
 		} else {

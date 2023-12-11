@@ -99,7 +99,7 @@ p {
 	padding-left: 0 !important;
 }
 
-input[type="checkbox"]:checked::before {
+/* input[type="checkbox"]:checked::before {
 	content: none !important;
 	margin: 0 !important;
 }
@@ -109,7 +109,7 @@ input[type="radio"] {
 	border-radius: 4px;
 	box-shadow: none !important;
 	margin: 0 !important;
-}
+} */
 
 /* Reviews */
 

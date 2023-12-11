@@ -1,6 +1,6 @@
 class Spromoter {
     constructor() {
-        this.baseUrl = 'https://spromoter.test/api/v1/';
+        this.baseUrl = 'http://spromoter.test/api/v1/';
         this.appId = document.querySelector('.spromoter-container')?.dataset.spromoterAppId;
     }
 
@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Get reviews from API
     let reviews = spromoter.getReviews()
+
     reviews.then(function (data) {
         let reviews = data.data?.reviews.map(function (review) {
             return createReviewData(review)
@@ -146,7 +147,6 @@ document.addEventListener('DOMContentLoaded', function () {
         bottomLineStars.classList.add('spromoter-bottom-line-rating');
         bottomLineStars.innerHTML = stars;
         bottomLine.appendChild(bottomLineStars);
-
 
         // Add write review button
         let writeReviewButton = document.createElement('a');
