@@ -1,18 +1,18 @@
 class Spromoter {
     constructor() {
         this.baseUrl = 'http://spromoter.test/api/v1/';
-        this.appId = document.querySelector('.spromoter-container')?.dataset.spromoterAppId;
+        this.appId = document.querySelector('.spromoter-container') ? .dataset.spromoterAppId;
     }
 
     // Get reviews
     getReviews() {
         return fetch(this.baseUrl + `${this.appId}/reviews`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-App-Id': this.appId,
-            }
-        })
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-App-Id': this.appId,
+                }
+            })
             .then(function (response) {
                 if (!response.ok) {
                     console.log(response);
@@ -27,14 +27,14 @@ class Spromoter {
     // Submit review
     submitReview(data) {
         return fetch(this.baseUrl + `${this.appId}/reviews`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-App-Id': this.appId,
-            },
-            body: JSON.stringify(data)
-        })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-App-Id': this.appId,
+                },
+                body: JSON.stringify(data)
+            })
             .then(function (response) {
                 if (!response.ok) {
                     console.log(response);
@@ -67,13 +67,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let reviews = spromoter.getReviews()
 
     reviews.then(function (data) {
-        let reviews = data.data?.reviews.map(function (review) {
+        let reviews = data.data ? .reviews.map(function (review) {
             return createReviewData(review)
         });
 
         createReviewContainers(reviews);
-
-        createBottomLine(data.data?.average_rating);
+        createBottomLine(data.data ? .average_rating);
     });
 
     // Submit new review
@@ -85,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function appendReview(item, isPrepend = false) {
         const spromoterReviews = document.getElementById('spromoterReviews');
-
         const reviewContainer = document.createElement('div');
         reviewContainer.classList.add('spromoter-single-review');
 
@@ -106,12 +104,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (isPrepend) {
             spromoterReviews.prepend(reviewContainer);
-        }else{
+        } else {
             spromoterReviews.appendChild(reviewContainer);
         }
     }
 
-    function createReviewData(review){
+    function createReviewData(review) {
         let ratings = '';
 
         for (let i = 0; i < review.rating; i++) {
@@ -137,12 +135,13 @@ document.addEventListener('DOMContentLoaded', function () {
             // Check if rating is float
             if (rating % 1 !== 0 && i === Math.floor(rating)) {
                 stars += '<i class="bi bi-star-half"></i>';
-            }else if (i < rating) {
+            } else if (i < rating) {
                 stars += '<i class="bi bi-star-fill"></i>';
             } else {
                 stars += '<i class="bi bi-star"></i>';
             }
         }
+
         let bottomLineStars = document.createElement('div');
         bottomLineStars.classList.add('spromoter-bottom-line-rating');
         bottomLineStars.innerHTML = stars;

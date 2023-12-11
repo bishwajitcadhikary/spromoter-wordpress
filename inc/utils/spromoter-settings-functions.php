@@ -129,7 +129,6 @@ function spromoter_display_settings_page() {
                         <a href="#" class="spromoter-brand">
                             <img src="<?= spromoter_get_image_url( 'logo.png' ) ?>" alt="SPromoter">
                         </a>
-
                         <h2 class="mb-4">Configure your settings!</h2>
 
                         <form id="spromoterSettingsForm" method="POST">
@@ -165,7 +164,7 @@ function spromoter_display_settings_page() {
 
                             <div class="mb-3">
                                 <label for="order_status" class="spromoter-form-label mb-2">Order Status</label>
-                                <select name="order_status" id="order_status" class="spromoter-form-input">
+                                <select name="order_status" id="order_status" class="spromoter-form-input spromoter-form-select">
                                     <option value="completed" <?= selected( 'completed', $order_status, false ) ?>>
                                         Completed
                                     </option>
@@ -185,7 +184,7 @@ function spromoter_display_settings_page() {
                                 </select>
                             </div>
 
-                            <div class="spromoter-form-check ps-0 mb-4">
+                            <div class="spromoter-form-check ps-0 mb-3">
                                 <input
                                         type="checkbox"
                                         name="disable_native_review_system"
@@ -217,8 +216,8 @@ function spromoter_display_settings_page() {
                             <input type="hidden" name="export_reviews" value="true">
                         </form>
 
-                        <div style="display: flex; justify-content: space-between">
-                            <button type="submit" class="spromoter-export-button" form="spromoterExportForm">Export Reviews</button>
+                        <div class="spromoter-button-group">
+                            <button type="submit" class="spromoter-secondary-button" form="spromoterExportForm">Export Reviews</button>
                             <button type="submit" class="spromoter-button" form="spromoterSettingsForm">Save Changes</button>
                         </div>
                     </div>
