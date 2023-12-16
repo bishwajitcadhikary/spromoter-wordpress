@@ -1,6 +1,6 @@
 class Spromoter {
     constructor() {
-        this.baseUrl = 'http://spromoter.test/api/v1/';
+        this.baseUrl = 'https://spromoter.test/api/v1/';
         this.appId = document.querySelector('.spromoter-container') ?.dataset.spromoterAppId;
     }
     
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
 
         createReviewContainers(reviews);
-        createBottomLine(data.data ?.average_rating);
+        createBottomLine(data.data ?.average_rating, data.data ?.total_reviews);
     });
 
     // Submit new review
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function createBottomLine(rating) {        
+    function createBottomLine(rating, totalReviews) {
         let bottomLine = document.querySelector('.spromoter-bottom-line');
 
         // Add rating
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Add write review button
         let writeReviewButton = document.createElement('a');
         writeReviewButton.classList.add('spromoter-write-review');
-        writeReviewButton.innerText = 'Write a review';
+        writeReviewButton.innerText =  totalReviews > 0 ? totalReviews + ' Reviews' :'Write a review';
         writeReviewButton.href = '#spromoter-reviews-form';
         bottomLine.appendChild(writeReviewButton);
     }
@@ -218,6 +218,9 @@ document.addEventListener('DOMContentLoaded', function () {
             // Prepend new review
             appendReview(review, true);
 
+            // Reset form
+            reviewForm.reset();
+
             // Hide form
             reviewForm.style.display = 'none';
 
@@ -227,6 +230,10 @@ document.addEventListener('DOMContentLoaded', function () {
             successMessage.innerText = 'Thank you for your review!';
             reviewFormWrapper.appendChild(successMessage);
         });
+    });
+
+    document.getElementById('spromoter-write-review-button').addEventListener('click', function() {
+        document.querySelector('.spromoter-review-form').style.display = "block";
     });
 
 
