@@ -1,6 +1,6 @@
 class Spromoter {
     constructor() {
-        this.baseUrl = 'https://spromoter.test/api/v1/';
+        this.baseUrl = 'http://spromoter.test/api/v1/';
         this.appId = document.querySelector('.spromoter-container') ?.dataset.spromoterAppId;
     }
     
@@ -235,11 +235,5 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('spromoter-write-review-button').addEventListener('click', function() {
         document.querySelector('.spromoter-review-form').style.display = "block";
     });
-
-
-
-    // document.querySelector('.spromoter-write-review').addEventListener('click', function() {
-    //     document.querySelector('.spromoter-review-form').style.display = "block";
-    // })
 
 });
