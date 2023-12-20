@@ -44,7 +44,7 @@ function spromoter_show_reviews_widget() {
 }
 
 function spromoter_widgets_render_in_bottom_line(){
-	add_action('woocommerce_single_product_summary', 'spromoter_show_main_widget_in_bottom_line');
+	add_action('woocommerce_single_product_summary', 'spromoter_show_main_widget_in_bottom_line', 15);
 }
 
 function spromoter_show_main_widget_in_bottom_line(){
