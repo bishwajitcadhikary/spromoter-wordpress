@@ -50,8 +50,7 @@ function spromoter_init()
 			add_action('wp_enqueue_scripts', 'spromoter_admin_scripts');
 		}
 	}elseif(spromoter_compatible() && !empty($spromoter_settings['api_key']) && !empty($spromoter_settings['app_id'])){
-		add_action('template_redirect', 'spromoter_frontend_init');
-		
+		add_action('template_redirect', 'spromoter_frontend_init');		
 		add_action('wp_enqueue_scripts', 'spromoter_front_styles');
 		add_action('wp_enqueue_scripts', 'spromoter_front_scripts');
 	}

@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
 
         createReviewContainers(reviews);
+
         createBottomLine(data.data ?.average_rating, data.data ?.total_reviews);
     });
 
@@ -125,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function createBottomLine(rating, totalReviews) {
-        let bottomLine = document.querySelector('.spromoter-bottom-line');
+        let bottomLine = document.querySelector('.spromoter-product-review-box');
 
         // Add rating
         let stars = '';
@@ -140,15 +141,22 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         let bottomLineStars = document.createElement('div');
-        bottomLineStars.classList.add('spromoter-bottom-line-rating');
+        bottomLineStars.classList.add('spromoter-product-review-box-rating');
         bottomLineStars.innerHTML = stars;
         bottomLine.appendChild(bottomLineStars);
 
+        // Review summary
+        const reviewAverage = document.getElementById('spromotertotalReviewsStars');
+        reviewAverage.innerHTML = stars;
+
+        document.getElementById('spromotertotalReviewsAverage').innerHTML = rating;
+        document.getElementById('spromotertotalReviews').innerHTML = totalReviews;
+
         // Add write review button
-        let writeReviewButton = document.createElement('a');
+        let writeReviewButton = document.createElement('div');
         writeReviewButton.classList.add('spromoter-write-review');
         writeReviewButton.innerText =  totalReviews > 0 ? totalReviews + ' Reviews' :'Write a review';
-        writeReviewButton.href = '#spromoter-reviews-form';
+        //writeReviewButton.href = '#spromoterReviewContainer';
         bottomLine.appendChild(writeReviewButton);
     }
 
@@ -232,7 +240,29 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Open review form after click the 'write review button'
     document.getElementById('spromoter-write-review-button').addEventListener('click', function() {
         document.querySelector('.spromoter-review-form').style.display = "block";
     });
+
+    // Scroll down to review section
+    const productReviewBox = document.querySelector('div.spromoter-product-review-box');
+    
+    if (productReviewBox) {
+        productReviewBox.addEventListener('click', function() {
+        const spromoterWidgetTabLink = document.querySelector('li.spromoter_main_widget_tab > a');
+    
+        if (spromoterWidgetTabLink) {
+            spromoterWidgetTabLink.click();
+
+            const reviewContainerSection = document.getElementById('spromoterReviewContainer');
+    
+                if (reviewContainerSection) {
+                    reviewContainerSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    }
+
+
 });
