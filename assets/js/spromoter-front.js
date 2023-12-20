@@ -35,7 +35,7 @@ class Spromoter {
             })
             .then(function (response) {
                 if (!response.ok) {
-                    console.log(response);
+                    //console.log(response);
 
                     return Promise.reject(response);
                 }
@@ -48,7 +48,7 @@ class Spromoter {
 document.addEventListener('DOMContentLoaded', function () {
     let spromoter = new Spromoter();
 
-    let spromoterContainer = document.querySelector('.spromoter-container')
+    let spromoterContainer = document.querySelector('.spromoter-container');
 
     if (!spromoterContainer) {
         return;
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let productLang = spromoterContainer.dataset.spromoterProductLang;
 
     // Get reviews from API
-    let reviews = spromoter.getReviews()
+    let reviews = spromoter.getReviews();
 
     reviews.then(function (data) {
         let reviews = data.data?.reviews.map(function (review) {
@@ -130,7 +130,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Add rating
         let stars = '';
         for (let i = 0; i < 5; i++) {
-            // Check if rating is float
             if (rating % 1 !== 0 && i === Math.floor(rating)) {
                 stars += '<i class="bi bi-star-half"></i>';
             } else if (i < rating) {
@@ -185,6 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Review Form Submit
     let reviewForm = document.querySelector('.spromoter-review-form');
+    
     reviewForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -235,5 +235,4 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('spromoter-write-review-button').addEventListener('click', function() {
         document.querySelector('.spromoter-review-form').style.display = "block";
     });
-
 });
