@@ -40,32 +40,32 @@
 
 /* spromoter styles */
 
-.spromoter-wrapper a,
-.spromoter-wrapper a:hover,
-.spromoter-wrapper a:focus {
+.spromoter-container a,
+.spromoter-container a:hover,
+.spromoter-container a:focus {
 	transition-duration: 400ms;
 	text-decoration: none;
 	outline: none;
 	box-shadow: none;
 }
 
-.spromoter-wrapper button,
+.spromoter-container button,
 .spromoter-container button {
 	border: 0 !important;
 	cursor: pointer;
 }
 
 .spromoter-container img,
-.spromoter-wrapper img {
+.spromoter-container img {
 	max-width: 100%;
 }
 
-.spromoter-wrapper h1,
-.spromoter-wrapper h2,
-.spromoter-wrapper h3,
-.spromoter-wrapper h4,
-.spromoter-wrapper h5,
-.spromoter-wrapper h6,
+.spromoter-container h1,
+.spromoter-container h2,
+.spromoter-container h3,
+.spromoter-container h4,
+.spromoter-container h5,
+.spromoter-container h6,
 .spromoter-container h1,
 .spromoter-container h2,
 .spromoter-container h3,
@@ -76,44 +76,44 @@
 	margin-top: 0 !important;
 }
 
-.spromoter-wrapper p,
+.spromoter-container p,
 .spromoter-container p {
 	color: #8480ae;
 	font-size: 16px;
 	margin-top: 0;
 }
 
-.spromoter-wrapper .mb-0 {
+.spromoter-container .mb-0 {
 	margin-bottom: 0 !important;
 }
 
-.spromoter-wrapper .mb-2 {
+.spromoter-container .mb-2 {
 	margin-bottom: 0.5rem !important;
 }
 
-.spromoter-wrapper .mb-3 {
+.spromoter-container .mb-3 {
 	margin-bottom: 1rem !important;
 }
 
-.spromoter-wrapper .mb-4 {
+.spromoter-container .mb-4 {
 	margin-bottom: 2rem !important;
 }
 
-.spromoter-wrapper .w-100 {
+.spromoter-container .w-100 {
 	width: 100% !important;
 }
 
-.spromoter-wrapper .ps-0 {
+.spromoter-container .ps-0 {
 	padding-left: 0 !important;
 }
 
-.spromoter-wrapper input[type="checkbox"]:checked::before {
+.spromoter-container input[type="checkbox"]:checked::before {
 	content: none !important;
 	margin: 0 !important;
 }
 
-.spromoter-wrapper input[type="checkbox"],
-.spromoter-wrapper input[type="radio"] {
+.spromoter-container input[type="checkbox"],
+.spromoter-container input[type="radio"] {
 	border-radius: 4px;
 	box-shadow: none !important;
 	margin: 0 !important;
@@ -171,6 +171,10 @@
 	color: #8480ae;
 }
 
+.spromoter-ratings > i {
+	margin: 0 2px;
+}
+
 .spromoter-ratings .bi-star-fill,
 .spromoter-ratings .bi-star-half,
 .spromoter-ratings .bi-star,
@@ -195,17 +199,18 @@
 }
 
 #spromoterReviews {
-	margin-top: 3rem;
+	margin-top: 2rem;
 }
 
 /* Forms */
 
 .spromoter-review-form {
-	margin-top: 3rem;
+	margin-top: 2rem;
 	border-radius: .5rem;
 	padding: 2rem;
 	background-color: #f2f6fb;
 	display: none;
+	border: 1px solid #ebebeb;
 }
 
 .spromoter-form-input {
@@ -213,7 +218,7 @@
 	font-size: 1rem !important;
 	width: 100%;
 	display: block;
-	border: 0 !important;
+	border: 1px solid #ebebeb !important;
 	height: 3rem;
 	margin-bottom: 1rem;
 	background-color: #fff;
@@ -487,10 +492,13 @@ textarea.spromoter-form-input {
 }
 
 .spromoter-total-review-show-wrap {
+	position: relative;
+	z-index: 1;
 	text-align: center;
-	padding: 2rem 1.5rem;
+	padding: 3.5rem 1.5rem 2rem;
 	border-radius: .5rem;
 	background-color: #f2f6fb;
+	border: 1px solid #ebebeb;
 }
 
 #spromotertotalReviewsAverage {
@@ -521,4 +529,47 @@ textarea.spromoter-form-input {
 
 #spromoter-write-review-button {
 	margin: 2rem auto 0;
+	border-radius: 3rem;
+}
+
+.powered-by-spromoter {
+	position: absolute;
+	top: -1px;
+	background-color: #fff;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: .3rem 1.5rem;
+	font-size: 13px;
+	border-radius: 0 0 12px 12px;
+	border-top: 2px solid #8480ae;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+	z-index: 100;
+	color: #8480ae;
+}
+
+#spromoterReviewFilter {
+	margin-top: 2rem;
+	border-bottom: 1px solid #ebebeb;
+}
+
+.spromoter-filter-form {
+	display: flex;
+	align-items: center;
+}
+
+.spromoter-filter-form > div {
+	flex: 0 0 33.33333%;
+	width: 33.33333%;
+	max-width: 33.33333%;
+	padding-left: 1rem;
+}
+
+.spromoter-filter-form > div:first-child {
+	padding-left: 0;
+}
+
+.spromoter-review-filter-title {
+	margin-bottom: 1.5rem;
+	border-bottom: 2px solid #ebebeb;
+	padding-bottom: 8px;
 }

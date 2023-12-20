@@ -8,7 +8,7 @@ function spromoter_display_register_page()
     $last_name = isset($_POST['last_name']) ? $_POST['last_name'] : '';
     $email = isset($_POST['email']) ? $_POST['email'] : '';
     ?>
-    <div class="spromoter-wrapper">
+    <div class="spromoter-container">
         <div class="authentication-wrapper">
             <div class="authentication-inner">
                 <div class="spromoter-settings-card">
@@ -118,7 +118,7 @@ function spromoter_display_settings_page()
     $disable_native_review_system = $spromoter_settings['disable_native_review_system'];
     $enable_bottom_line_widget = $spromoter_settings['show_bottom_line_widget'];
     ?>
-    <div class="spromoter-wrapper">
+    <div class="spromoter-container">
         <div class="spromoter-authentication-bg-shape">
             <img src="<?= spromoter_get_image_url('shape.png') ?>" alt="SPromoter">
         </div>

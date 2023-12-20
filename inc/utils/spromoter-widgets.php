@@ -38,6 +38,7 @@ function spromoter_show_reviews_widget() {
 			data-spromoter-product-specs='" .json_encode($product_data['specs']). "'
 			>
 			<div class='spromoter-total-review-show-wrap'>
+				<div class='powered-by-spromoter'>Powered by - Spromoter</div>
 				<div id='spromotertotalReviewsAverage'></div>
 				<div class='spromoter-total-reviews-star'>
 					<div id='spromotertotalReviewsStars'></div>
@@ -46,6 +47,7 @@ function spromoter_show_reviews_widget() {
 				<button type='button' class='spromoter-button' id='spromoter-write-review-button'>Write A Review</button>
 			</div>
 			<div id='spromoter-reviews-form'></div>
+		  <div id='spromoterReviewFilter'></div>
 		  <div id='spromoterReviews'></div>
 		</div>";
 }

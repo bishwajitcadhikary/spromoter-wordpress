@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
         bottomLine.appendChild(writeReviewButton);
     }
 
-    // Review Form
+    // Create review form
     const reviewFormWrapper = document.getElementById('spromoter-reviews-form');
 
     let reviewFormWrapperHTML = "" +
@@ -190,7 +190,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
     reviewFormWrapper.innerHTML = reviewFormWrapperHTML;
 
-    // Review Form Submit
+    // Create review filter
+    const spromoterReviewFilter = document.getElementById('spromoterReviewFilter');
+
+    let spromoterReviewFilterHTML = "" +
+    '<h5 class="spromoter-review-filter-title">Search Reviews</h5>' +
+    '<form class="spromoter-filter-form" id="" method="POST">' +
+      '<div class="mb-3">' +
+        '<label for="filter-search" class="spromoter-form-label mb-2">Search</label>' +
+        '<input type="search" class="spromoter-form-input" id="filter-search" name="" placeholder="Search Reviews"/>' +
+        '</div>' +
+      '<div class="mb-3">' +
+        '<label for="filter-ratings" class="spromoter-form-label mb-2">Ratings</label>' +
+        '<select name="filter-ratings" id="filter-ratings" class="spromoter-form-input spromoter-form-select">' +
+          '<option value="">5 star</option>' +
+          '<option value="">4 star</option>' +
+          '<option value="">3 star</option>' +
+          '<option value="">2 star</option>' +
+          '<option value="">1 star</option>' +
+        '</select>' +
+    '</div>' +
+      '<div class="mb-3">' +
+        '<label for="filter-review-created" class="spromoter-form-label mb-2">Date Published</label>' +
+        '<select name="filter-review-created" id="filter-review-created" class="spromoter-form-input spromoter-form-select">' +
+          '<option value="">Recently</option>' +
+          '<option value="">Older</option>' +
+        '</select>' +
+      '</div>' +
+    '</form>';
+
+    spromoterReviewFilter.innerHTML = spromoterReviewFilterHTML;
+
+    // Review form submit
     let reviewForm = document.querySelector('.spromoter-review-form');
     
     reviewForm.addEventListener('submit', function (e) {
@@ -263,6 +294,5 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-
 
 });
