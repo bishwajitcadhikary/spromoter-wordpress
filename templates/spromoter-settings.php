@@ -20,7 +20,11 @@ function spromoter_display_admin_page(){
 					spromoter_save_settings();
 					spromoter_display_settings_page();
 				} elseif ($_POST['page_type'] == 'register') {
-					spromoter_register_user();
+					if (spromoter_register_user()){
+                        spromoter_display_settings_page();
+                    }else{
+                        spromoter_display_register_page();
+                    }
 				}
 			} else {
 				// Display registration page if page_type is not set

@@ -273,7 +273,7 @@ function spromoter_register_user()
             'password_confirmation' => $_POST['password_confirmation'],
             'store_url' => get_site_url(),
             'store_name' => get_bloginfo('name'),
-            'store_logo' => get_site_icon_url(),
+            'store_logo' => ''
         ));
 
         if ($response) {
@@ -282,8 +282,11 @@ function spromoter_register_user()
 
             update_option('spromoter_settings', $spromoter_settings);
             spromoter_display_messages('User registered successfully');
+
+            return true;
         } else {
             spromoter_display_messages('Please check your credentials', true);
+            return false;
         }
     }
 }
