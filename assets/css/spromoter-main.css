@@ -231,7 +231,7 @@
 	width: 100%;
 	display: block;
 	border: 0 !important;
-	height: 52px;
+	height: 3rem;
 	border-radius: .5rem;
 	margin-bottom: 1rem;
 	background-color: #fff;
@@ -377,7 +377,7 @@ textarea.spromoter-form-input {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
-	border: 2px solid #0d6efd;
+	border: 1px solid #0d6efd;
 	-webkit-print-color-adjust: exact;
 	color-adjust: exact;
 	print-color-adjust: exact;
@@ -393,14 +393,14 @@ textarea.spromoter-form-input {
 	transition-duration: 400ms;
 	outline: none;
 	border: none;
-	padding: 0.875rem 1.75rem;
+	padding: 0.75rem 1.75rem;
 	font-size: 1rem;
 	font-weight: 500;
 	color: #fff;
 	background-color: #0d6efd;
 	line-height: 0 !important;
 	border-radius: .5rem;
-	height: 52px;
+	height: 3rem;
 	display: block;
 	min-width: 150px;
 }
@@ -414,14 +414,14 @@ textarea.spromoter-form-input {
 	transition-duration: 400ms;
 	outline: none;
 	border: none;
-	padding: 0.875rem 1.75rem;
+	padding: 0.75rem 1.75rem;
 	font-size: 1rem;
 	font-weight: 500;
 	color: #1f0757;
 	background-color: #F0F1F6;
 	line-height: 0 !important;
 	border-radius: .5rem;
-	height: 52px;
+	height: 3rem;
 	display: block;
 	min-width: 150px;
 }
@@ -468,7 +468,7 @@ textarea.spromoter-form-input {
 }
 
 .spromoter-settings-card .spromoter-form-input {
-	border: 2px solid #F0F1F6 !important;
+	border: 1px solid #F0F1F6 !important;
 }
 
 .spromoter-settings-card .spromoter-form-input:focus {

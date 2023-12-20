@@ -25,7 +25,6 @@ require plugin_dir_path( __FILE__ ) . 'inc/utils/spromoter-functions.php';
 require plugin_dir_path( __FILE__ ) . 'inc/utils/spromoter-widgets.php';
 require plugin_dir_path( __FILE__ ) . 'inc/Api/SpromoterApi.php';
 
-
 function spromoter_init()
 {
 	$is_admin = is_admin();

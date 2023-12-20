@@ -36,14 +36,10 @@ function spromoter_show_reviews_widget() {
 			data-spromoter-product-shop-domain='" .$product_data['shop_domain']. "'
 			data-spromoter-product-app-id='" .$product_data['app_id']. "'
 			data-spromoter-product-specs='" .json_encode($product_data['specs']). "'
-			
 			>
-			<div>
-			    <button type='button' id='spromoter-write-review-button'>Write Review</button>
-            </div>
-			<div id='spromoter-reviews-form'>			
-            </div>
-		    <div id='spromoterReviews'></div>
+			<button type='button' id='spromoter-write-review-button'>Write Review</button>
+			<div id='spromoter-reviews-form'></div>
+		  <div id='spromoterReviews'></div>
 		</div>";
 }
 
