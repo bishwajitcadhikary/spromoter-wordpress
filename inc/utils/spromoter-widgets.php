@@ -38,8 +38,12 @@ function spromoter_show_reviews_widget() {
 			data-spromoter-product-specs='" .json_encode($product_data['specs']). "'
 			
 			>
-		<div id='spromoterReviews'></div>
-		<div id='spromoter-reviews-form'></div>
+			<div>
+			    <button type='button' id='spromoter-write-review-button'>Write Review</button>
+            </div>
+			<div id='spromoter-reviews-form'>			
+            </div>
+		    <div id='spromoterReviews'></div>
 		</div>";
 }
 

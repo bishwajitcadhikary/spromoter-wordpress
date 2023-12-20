@@ -18,7 +18,7 @@ register_deactivation_hook(__FILE__, 'spromoter_deactivate');
 register_uninstall_hook(__FILE__, 'spromoter_uninstall');
 add_action('plugins_loaded', 'spromoter_init');
 add_action('before_woocommerce_init', 'declare_hops_support');
-add_action('woocommerce_order_status_changed', 'spromoter_wc_on_order_status_changed');
+//add_action('woocommerce_order_status_changed', 'spromoter_wc_on_order_status_changed');
 
 require plugin_dir_path( __FILE__ ) . 'inc/utils/spromoter-defaults.php';
 require plugin_dir_path( __FILE__ ) . 'inc/utils/spromoter-functions.php';
