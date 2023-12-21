@@ -69,8 +69,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
         createReviewContainers(reviews);
 
-        createBottomLine(data.data ?.average_rating, data.data ?.total_reviews);
+        createBottomLine(data.data?.average_rating, data.data?.total_reviews);
+
+        createLoadMoreButton(data.data?.has_more);
     });
+
+    function createLoadMoreButton(has_more) {
+        let loadMoreBtn = document.getElementById('spromoter-load-more-btn');
+
+        if(has_more) {
+            if (loadMoreBtn) {
+                loadMoreBtn.style.display = "block";
+            } else {
+                let newLoadMoreBtn = document.createElement('button');
+                newLoadMoreBtn.classList.add('spromoter-load-more-button');
+                newLoadMoreBtn.id = 'spromoter-load-more-btn';
+                newLoadMoreBtn.type = 'button';
+                newLoadMoreBtn.innerText = 'Load more';
+                document.getElementById('spromoterReviews').append(newLoadMoreBtn);
+
+                newLoadMoreBtn.addEventListener('click', function() {
+                    
+                })
+            }
+        }
+    }
 
     // Submit new review
     function createReviewContainers(reviewData) {
@@ -109,8 +132,12 @@ document.addEventListener('DOMContentLoaded', function () {
     function createReviewData(review) {
         let ratings = '';
 
-        for (let i = 0; i < review.rating; i++) {
-            ratings += '<i class="bi bi-star-fill"></i>';
+        for (let i = 0; i < 5; i++) {
+            if (i < review.rating) {
+                ratings += '<i class="bi bi-star-fill"></i>';
+            } else {
+                ratings += '<i class="bi bi-star"></i>';
+            }
         }
 
         return {
