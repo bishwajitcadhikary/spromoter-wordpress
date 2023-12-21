@@ -3,7 +3,7 @@
 /*
 Plugin Name: SPromoter
 Description: A simple plugin to manage reviews and ratings for your products.
-Version: 1.0
+Version: 1.0.0
 Author: Bishwajit Adhikary
 Author URI: https://github.com/bishwajitcadhikary
 Text Domain: spromoter
