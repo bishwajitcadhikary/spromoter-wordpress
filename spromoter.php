@@ -49,24 +49,31 @@ function spromoter_init()
 			add_action('wp_enqueue_styles', 'spromoter_admin_styles');
 			add_action('wp_enqueue_scripts', 'spromoter_admin_scripts');
 		}
-	}elseif(spromoter_compatible() && !empty($spromoter_settings['api_key']) && !empty($spromoter_settings['app_id'])){
-		add_action('template_redirect', 'spromoter_frontend_init');		
-		add_action('wp_enqueue_scripts', 'spromoter_front_styles');
-		add_action('wp_enqueue_scripts', 'spromoter_front_scripts');
-	}
+	}elseif(spromoter_compatible() && !empty($spromoter_settings['api_key']) && !empty($spromoter_settings['app_id'])) {
+        add_action('template_redirect', 'spromoter_frontend_init');
+    }
 }
 
 function spromoter_frontend_init()
 {
-	$spromoter_settings = get_option('spromoter_settings', spromoter_get_default_settings());
+	$spromoter_settings = spromoter_get_settings();
 	add_action('woocommerce_thankyou', 'spromoter_wc_on_thank_you');
 
 	if (is_product()){
-		spromoter_widgets_render_in_tabs();
-		spromoter_widgets_render_in_bottom_line();
+        if ($spromoter_settings['disable_native_review_system']){
+            if ($spromoter_settings['review_show_in'] == 'tab') {
+                spromoter_widgets_render_in_tabs();
+            } elseif ($spromoter_settings['review_show_in'] == 'footer') {
+                spromoter_widgets_render_in_footer();
+            }
 
-		if ($spromoter_settings['disable_native_review_system']){
 			add_filter( 'comments_open', 'spromoter_remove_native_review_system', null, 2 );
+
+            spromoter_widgets_render_in_bottom_line();
+
+
+            add_action('wp_enqueue_scripts', 'spromoter_front_styles');
+            add_action('wp_enqueue_scripts', 'spromoter_front_scripts');
 		}
 	}
 }
@@ -170,7 +177,15 @@ function spromoter_front_styles()
 
 function spromoter_front_scripts()
 {
-	wp_enqueue_script('spromoter-front-scripts', plugins_url('assets/js/spromoter-front.js', __FILE__));
+    if (class_exists('woocommerce')){
+        $settings = spromoter_get_settings();
+        wp_enqueue_script('spromoter-front-scripts', plugins_url('assets/js/spromoter-front.js', __FILE__));
+
+        wp_localize_script('spromoter-front-scripts', 'spromoterSettings', array(
+            'app_id' => $settings['app_id'],
+            'bottom_line' => $settings['show_bottom_line_widget'],
+        ));
+    }
 }
 
 function spromoter_remove_native_review_system( $open, $post_id ) {

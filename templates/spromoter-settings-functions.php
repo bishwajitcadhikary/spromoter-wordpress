@@ -110,11 +110,12 @@ function spromoter_display_register_page()
 
 function spromoter_display_settings_page()
 {
-    $spromoter_settings = get_option('spromoter_settings', spromoter_get_default_settings());
+    $spromoter_settings = spromoter_get_settings();
 
     $app_id = $spromoter_settings['app_id'];
     $api_key = $spromoter_settings['api_key'];
     $order_status = $spromoter_settings['order_status'];
+    $review_show_in = $spromoter_settings['review_show_in'];
     $disable_native_review_system = $spromoter_settings['disable_native_review_system'];
     $enable_bottom_line_widget = $spromoter_settings['show_bottom_line_widget'];
     ?>
@@ -187,6 +188,18 @@ function spromoter_display_settings_page()
                                 </select>
                             </div>
 
+                            <div class="mb-3">
+                                <label for="review_show_in" class="spromoter-form-label mb-2">Review Show In</label>
+                                <select name="review_show_in" id="review_show_in" class="spromoter-form-input spromoter-form-select">
+                                    <option value="tab" <?= selected('tab', $review_show_in, false) ?>>
+                                        Tab
+                                    </option>
+                                    <option value="footer" <?= selected('footer', $review_show_in, false) ?>>
+                                        Footer
+                                    </option>
+                                </select>
+                            </div>
+
                             <div class="spromoter-form-check ps-0 mb-3">
                                 <input
                                         type="checkbox"
@@ -242,6 +255,7 @@ function spromoter_save_settings()
         $spromoter_settings['app_id'] = $_POST['app_id'];
         $spromoter_settings['api_key'] = $_POST['api_key'];
         $spromoter_settings['order_status'] = $_POST['order_status'];
+        $spromoter_settings['review_show_in'] = $_POST['review_show_in'];
         $spromoter_settings['disable_native_review_system'] = ($_POST['disable_native_review_system'] == '1');
         $spromoter_settings['show_bottom_line_widget'] = ($_POST['show_bottom_line_widget'] == '1');
 

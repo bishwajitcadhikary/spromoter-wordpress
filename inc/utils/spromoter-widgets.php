@@ -4,6 +4,10 @@ function spromoter_widgets_render_in_tabs() {
 	add_action('woocommerce_product_tabs', 'spromoter_show_main_widget_in_tab');
 }
 
+function spromoter_widgets_render_in_footer() {
+	add_action('woocommerce_after_single_product', 'spromoter_show_main_widget_in_footer');
+}
+
 function spromoter_show_main_widget_in_tab($tabs) {
 	global $product;
 	if ( $product->get_reviews_allowed() ) {
@@ -17,6 +21,13 @@ function spromoter_show_main_widget_in_tab($tabs) {
 	}
 
 	return $tabs;
+}
+
+function spromoter_show_main_widget_in_footer() {
+    global $product;
+    if ( $product->get_reviews_allowed() ) {
+        spromoter_show_reviews_widget();
+    }
 }
 
 function spromoter_show_reviews_widget() {
@@ -49,6 +60,7 @@ function spromoter_show_reviews_widget() {
 			<div id='spromoter-reviews-form'></div>
 		  <div id='spromoterReviewFilter'></div>
 		  <div id='spromoterReviews'></div>
+		  <div id='spromoterActions' class='spromoter-actions'></div>
 		</div>";
 }
 
@@ -59,7 +71,6 @@ function spromoter_widgets_render_in_bottom_line(){
 function spromoter_show_main_widget_in_bottom_line(){
 	global $product;
 	if ( $product->get_reviews_allowed() ) {
-		$spromoter_settings = spromoter_get_settings();
 		$product_data = spromoter_get_product_data($product);
 
 		echo "<div class='spromoter-product-review-box' 

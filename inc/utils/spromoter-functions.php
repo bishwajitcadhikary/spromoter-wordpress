@@ -41,17 +41,14 @@ function spromoter_get_product_data($product) {
 		'description' => esc_attr(wp_strip_all_tags($product->get_description())),
 		'id' => esc_attr($product->get_id()),
 		'title' => esc_attr($product->get_title()),
-		'image-url' => esc_attr(wp_get_attachment_url(get_post_thumbnail_id($product->get_id())))
+		'image-url' => esc_attr(wp_get_attachment_url(get_post_thumbnail_id($product->get_id()))),
+        'specs' => get_specs_data($product),
 	);
 
-	//if($settings['yotpo_language_as_site'] == true) {
 	$lang = explode('-', get_bloginfo('language'));
 	if(strlen($lang[0]) == 2) {
 		$product_data['lang'] = $lang[0];
 	}
-	//}
-	$specs_data = get_specs_data($product);
-	if(!empty($specs_data)){ $product_data['specs'] = $specs_data;  }
 
 	return $product_data;
 }
@@ -64,13 +61,13 @@ function spromoter_get_product_data($product) {
  * @return array
  */
 function get_specs_data($product) {
-	$specs_data = array();
-	if($product->get_sku()){ $specs_data['external_sku'] =$product->get_sku();}
-	if($product->get_attribute('upc')){ $specs_data['upc'] =$product->get_attribute('upc');}
-	if($product->get_attribute('isbn')){ $specs_data['isbn'] = $product->get_attribute('isbn');}
-	if($product->get_attribute('brand')){ $specs_data['brand'] = $product->get_attribute('brand');}
-	if($product->get_attribute('mpn')){ $specs_data['mpn'] =$product->get_attribute('mpn');}
-	return $specs_data;
+	return array(
+        'sku' => $product->get_sku() ?? $product->data['sku'] ?? '',
+        'upc' => $product->get_attribute('upc') ?? $product->data['upc'] ?? '',
+        'isbn' => $product->get_attribute('isbn') ?? $product->data['isbn'] ?? '',
+        'brand' => $product->get_attribute('brand') ?? $product->data['brand'] ?? '',
+        'mpn' => $product->get_attribute('mpn') ?? $product->data['mpn'] ?? '',
+    );
 }
 
 /**
