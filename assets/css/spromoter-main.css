@@ -1,10 +1,3 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v8.4.14,
-* Autoprefixer: v10.4.7
-* Browsers: last 4 version
-*/
-
 @font-face {
   font-display: block;
   font-family: "bootstrap-icons";
@@ -649,6 +642,33 @@ textarea.spromoter-form-input {
   margin-bottom: 1.5rem;
   border-bottom: 2px solid #ebebeb;
   padding-bottom: 8px;
+}
+
+.spromoter-actions {
+	margin-top: 2rem;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+}
+
+.spromoter-no-review {
+	text-align: center;
+}
+
+.spromoter-load-more-button {
+  outline: none;
+  border: none;
+  padding: 0.75rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #1f0757;
+  line-height: 0 !important;
+  border-radius: .5rem;
+  height: 3rem;
 }
 
 .spromoter-total-review-show-wrap::before {
