@@ -61,13 +61,13 @@ function spromoter_frontend_init()
 
 	if (is_product()){
         if ($spromoter_settings['disable_native_review_system']){
+            add_filter( 'comments_open', 'spromoter_remove_native_review_system', null, 2 );
+
             if ($spromoter_settings['review_show_in'] == 'tab') {
                 spromoter_widgets_render_in_tabs();
             } elseif ($spromoter_settings['review_show_in'] == 'footer') {
                 spromoter_widgets_render_in_footer();
             }
-
-			add_filter( 'comments_open', 'spromoter_remove_native_review_system', null, 2 );
 
             spromoter_widgets_render_in_bottom_line();
 
@@ -124,7 +124,11 @@ function spromoter_wc_on_order_status_changed($order_id){
 				'order_date' => $order->get_date_created()->format('Y-m-d H:i:s'),
 				'currency' => $order->get_currency(),
 				'items' => $items,
+                'status' => $orderStatus,
+                'data' => $order->get_data(),
 			];
+
+            file_put_contents('../order.json', json_encode($order->get_data()) . "\n", FILE_APPEND);
 
 			$response = $spromoter->createOrder($orderData);
 
