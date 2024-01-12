@@ -86,7 +86,7 @@ function spromoter_wc_on_order_status_changed($order_id){
 
 	$settings = spromoter_get_settings();
 
-	if ($orderStatus == $settings['order_status']){
+	//if ($orderStatus == $settings['order_status']){
 		$apiKey = $settings['api_key'];
 		$appId = $settings['app_id'];
 
@@ -96,14 +96,19 @@ function spromoter_wc_on_order_status_changed($order_id){
 			$spromoter = new SpromoterApi();
 
 			$items = array();
-			foreach($order->get_items() as $item_id => $item) {
-				$product = wc_get_product($item['product_id']);
-				$items[] = array(
+			foreach($order->get_items() as $item) {
+                dd($item['quantity']);
+                $product = wc_get_product($item['product_id']);
+                $productId = $product->get_id();
+                $items[] = array(
+                    'id' => "$productId",
 					'name' => $product->get_name(),
 					'image' => spromoter_get_product_image_url($product->get_id()),
 					'url' => $product->get_permalink(),
 					'description' => wp_strip_all_tags($product->get_description()),
+                    'lang' => get_locale(),
 					'price' => $product->get_price(),
+                    'quantity' => $item['quantity'],
 					'specs' => array(
 						'sku' => $product->get_sku(),
 						'upc' => $product->get_attribute('upc'),
@@ -120,24 +125,24 @@ function spromoter_wc_on_order_status_changed($order_id){
 			$orderData = [
 				'customer_name' => $order->get_billing_first_name() . ' ' . $order->get_billing_last_name(),
 				'customer_email' => $order->get_billing_email(),
-				'order_id' => $order->get_id(),
+				'order_id' => "$order_id",
 				'order_date' => $order->get_date_created()->format('Y-m-d H:i:s'),
 				'currency' => $order->get_currency(),
 				'items' => $items,
                 'status' => $orderStatus,
                 'data' => $order->get_data(),
+                'platform' => 'woocommerce',
 			];
-
-            file_put_contents('../order.json', json_encode($order->get_data()) . "\n", FILE_APPEND);
 
 			$response = $spromoter->createOrder($orderData);
 
-			if(!$response){
-				spromoter_debug( 'Error while sending order data to SPromoter API', 'spromoter_wc_on_order_status_changed' );
+            dd($response);
+			if(!$response['status']) {
+				spromoter_debug( $response['message'] .'::'. json_encode($response['errors']), 'spromoter_wc_on_order_status_changed' );
 			}
 
 		}
-	}
+	//}
 }
 function spromoter_activate()
 {

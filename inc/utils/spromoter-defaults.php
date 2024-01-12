@@ -8,5 +8,6 @@ function spromoter_get_default_settings(){
 		'review_show_in' => 'tab',
 		'disable_native_review_system' => true,
 		'show_bottom_line_widget' => true,
+        'debug_mode' => true
 	);
 }

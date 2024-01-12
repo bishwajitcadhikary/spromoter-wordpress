@@ -81,11 +81,6 @@ class SpromoterApi {
 
 		$result = $this->sendRequest('orders/'. $this->app_id, 'POST', $data);
 
-		$response = json_decode($result, true);
-		if ($response['status'] == 'success') {
-			return true;
-		} else {
-			return false;
-		}
+		return json_decode($result, true);
 	}
 }
