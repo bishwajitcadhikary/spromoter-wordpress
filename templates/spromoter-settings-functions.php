@@ -233,9 +233,9 @@ function spromoter_display_settings_page()
                         </form>
 
                         <div class="spromoter-button-group">
-                            <button type="submit" class="spromoter-secondary-button" form="spromoterExportForm">Export
+                            <!--<button type="submit" class="spromoter-secondary-button" form="spromoterExportForm">Export
                                 Reviews
-                            </button>
+                            </button>-->
                             <button type="submit" class="spromoter-button" form="spromoterSettingsForm">Save Changes
                             </button>
                         </div>
@@ -287,12 +287,12 @@ function spromoter_register_user()
             'password_confirmation' => $_POST['password_confirmation'],
             'store_url' => get_site_url(),
             'store_name' => get_bloginfo('name'),
-            'store_logo' => ''
+            'store_logo' => '',
         ));
 
-        if ($response) {
-            $spromoter_settings['app_id'] = $response['app_id'];
-            $spromoter_settings['api_key'] = $response['api_key'];
+        if ($response['status'] == 'success') {
+            $spromoter_settings['app_id'] = $response['data']['app_id'];
+            $spromoter_settings['api_key'] = $response['data']['api_key'];
 
             update_option('spromoter_settings', $spromoter_settings);
             spromoter_display_messages('User registered successfully');

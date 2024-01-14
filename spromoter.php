@@ -4,8 +4,9 @@
 Plugin Name: SPromoter
 Description: A simple plugin to manage reviews and ratings for your products.
 Version: 1.0.0
-Author: Bishwajit Adhikary
+Author: SPromoter
 Author URI: https://github.com/bishwajitcadhikary
+Plugin URI: https://spromoter.com
 Text Domain: spromoter
 License: GPLv2 or later
 */
@@ -95,9 +96,21 @@ function spromoter_wc_on_order_status_changed($order_id){
 
 			$spromoter = new SpromoterApi();
 
+            $orderData = [
+                'customer_name' => $order->get_billing_first_name() . ' ' . $order->get_billing_last_name(),
+                'customer_email' => $order->get_billing_email(),
+                'order_id' => "$order_id",
+                'order_date' => $order->get_date_created()->format('Y-m-d H:i:s'),
+                'currency' => $order->get_currency(),
+                'status' => $orderStatus,
+                'total' => $order->get_total(),
+                'data' => $order->get_data(),
+                'platform' => 'woocommerce',
+            ];
+
+
 			$items = array();
 			foreach($order->get_items() as $item) {
-                dd($item['quantity']);
                 $product = wc_get_product($item['product_id']);
                 $productId = $product->get_id();
                 $items[] = array(
@@ -122,21 +135,11 @@ function spromoter_wc_on_order_status_changed($order_id){
 				);
 			}
 
-			$orderData = [
-				'customer_name' => $order->get_billing_first_name() . ' ' . $order->get_billing_last_name(),
-				'customer_email' => $order->get_billing_email(),
-				'order_id' => "$order_id",
-				'order_date' => $order->get_date_created()->format('Y-m-d H:i:s'),
-				'currency' => $order->get_currency(),
-				'items' => $items,
-                'status' => $orderStatus,
-                'data' => $order->get_data(),
-                'platform' => 'woocommerce',
-			];
+            $orderData['items'] = $items;
 
 			$response = $spromoter->createOrder($orderData);
 
-            dd($response);
+            dd($response, $order->get_data());
 			if(!$response['status']) {
 				spromoter_debug( $response['message'] .'::'. json_encode($response['errors']), 'spromoter_wc_on_order_status_changed' );
 			}
