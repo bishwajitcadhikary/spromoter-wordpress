@@ -52,4 +52,3 @@ This plugin is licensed under the [GPLv2 or later](https://www.gnu.org/licenses/
 
 ### Version 1.0.0
 - Initial release of SPromoter: Product & Photo Reviews for WooCommerce.
-
