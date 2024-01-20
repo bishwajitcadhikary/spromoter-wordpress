@@ -5,8 +5,7 @@ Plugin Name: SPromoter
 Description: A simple plugin to manage reviews and ratings for your products.
 Version: 1.0.0
 Author: SPromoter
-Author URI: https://github.com/bishwajitcadhikary
-Plugin URI: https://spromoter.com
+Author URI:  https://spromoter.com
 Text Domain: spromoter
 License: GPLv2 or later
 */
@@ -87,14 +86,14 @@ function spromoter_wc_on_order_status_changed($order_id){
 
 	$settings = spromoter_get_settings();
 
-	//if ($orderStatus == $settings['order_status']){
-		$apiKey = $settings['api_key'];
-		$appId = $settings['app_id'];
+	if ($orderStatus == $settings['order_status']) {
+        $apiKey = $settings['api_key'];
+        $appId = $settings['app_id'];
 
-		if (!empty($apiKey) && !empty($appId) && spromoter_compatible()){
-			require plugin_dir_path(__FILE__) . 'classes/class-spromoter-export-reviews.php';
+        if (!empty($apiKey) && !empty($appId) && spromoter_compatible()) {
+            require plugin_dir_path(__FILE__) . 'classes/class-spromoter-export-reviews.php';
 
-			$spromoter = new SpromoterApi();
+            $spromoter = new SpromoterApi();
 
             $orderData = [
                 'customer_name' => $order->get_billing_first_name() . ' ' . $order->get_billing_last_name(),
@@ -109,43 +108,42 @@ function spromoter_wc_on_order_status_changed($order_id){
             ];
 
 
-			$items = array();
-			foreach($order->get_items() as $item) {
+            $items = array();
+            foreach ($order->get_items() as $item) {
                 $product = wc_get_product($item['product_id']);
                 $productId = $product->get_id();
                 $items[] = array(
                     'id' => "$productId",
-					'name' => $product->get_name(),
-					'image' => spromoter_get_product_image_url($product->get_id()),
-					'url' => $product->get_permalink(),
-					'description' => wp_strip_all_tags($product->get_description()),
+                    'name' => $product->get_name(),
+                    'image' => spromoter_get_product_image_url($product->get_id()),
+                    'url' => $product->get_permalink(),
+                    'description' => wp_strip_all_tags($product->get_description()),
                     'lang' => get_locale(),
-					'price' => $product->get_price(),
+                    'price' => $product->get_price(),
                     'quantity' => $item['quantity'],
-					'specs' => array(
-						'sku' => $product->get_sku(),
-						'upc' => $product->get_attribute('upc'),
-						'ean' => $product->get_attribute('ean'),
-						'isbn' => $product->get_attribute('isbn'),
-						'asin' => $product->get_attribute('asin'),
-						'gtin' => $product->get_attribute('gtin'),
-						'mpn' => $product->get_attribute('mpn'),
-						'brand' => $product->get_attribute('brand'),
-					)
-				);
-			}
+                    'specs' => array(
+                        'sku' => $product->get_sku(),
+                        'upc' => $product->get_attribute('upc'),
+                        'ean' => $product->get_attribute('ean'),
+                        'isbn' => $product->get_attribute('isbn'),
+                        'asin' => $product->get_attribute('asin'),
+                        'gtin' => $product->get_attribute('gtin'),
+                        'mpn' => $product->get_attribute('mpn'),
+                        'brand' => $product->get_attribute('brand'),
+                    )
+                );
+            }
 
             $orderData['items'] = $items;
 
-			$response = $spromoter->createOrder($orderData);
+            $response = $spromoter->createOrder($orderData);
 
-            dd($response, $order->get_data());
-			if(!$response['status']) {
-				spromoter_debug( $response['message'] .'::'. json_encode($response['errors']), 'spromoter_wc_on_order_status_changed' );
-			}
+            if (!$response['status']) {
+                spromoter_debug($response['message'] . '::' . json_encode($response['errors']), 'spromoter_wc_on_order_status_changed');
+            }
 
-		}
-	//}
+        }
+    }
 }
 function spromoter_activate()
 {

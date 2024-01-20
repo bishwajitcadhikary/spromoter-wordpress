@@ -233,9 +233,9 @@ function spromoter_display_settings_page()
                         </form>
 
                         <div class="spromoter-button-group">
-                            <!--<button type="submit" class="spromoter-secondary-button" form="spromoterExportForm">Export
+                            <button type="submit" class="spromoter-secondary-button" form="spromoterExportForm">Export
                                 Reviews
-                            </button>-->
+                            </button>
                             <button type="submit" class="spromoter-button" form="spromoterSettingsForm">Save Changes
                             </button>
                         </div>

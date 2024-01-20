@@ -36,6 +36,14 @@
   content: "\f589";
 }
 
+.bi-patch-check-fill::before {
+  content: "\f4b5";
+}
+
+.bi-patch-check::before {
+  content: "\f4b6";
+}
+
 /* spromoter styles */
 
 .spromoter-container a,
@@ -695,6 +703,13 @@ textarea.spromoter-form-input {
   content: "\f589";
   -webkit-animation: downUpAnimation 5s linear 4;
   animation: downUpAnimation 5s linear 4;
+}
+
+.spromoter-purchased {
+  top: -4px;
+  position: relative;
+  color: #0b5fab;
+  font-size: 16px;
 }
 
 @-webkit-keyframes upDownAnimation {
