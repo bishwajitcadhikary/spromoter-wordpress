@@ -192,6 +192,7 @@ function spromoter_front_scripts()
     if (class_exists('woocommerce')){
         $settings = spromoter_get_settings();
         wp_enqueue_script('spromoter-front-scripts', plugins_url('assets/js/spromoter-front.js', __FILE__));
+        wp_enqueue_script('spromoter-lightbox-scripts', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js');
 
         wp_localize_script('spromoter-front-scripts', 'spromoterSettings', array(
             'app_id' => $settings['app_id'],
