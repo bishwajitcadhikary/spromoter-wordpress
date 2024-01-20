@@ -705,13 +705,6 @@ textarea.spromoter-form-input {
   animation: downUpAnimation 5s linear 4;
 }
 
-.spromoter-purchased {
-  top: -4px;
-  position: relative;
-  color: #0b5fab;
-  font-size: 16px;
-}
-
 @-webkit-keyframes upDownAnimation {
   0% {
     -webkit-transform: translateY(0);
