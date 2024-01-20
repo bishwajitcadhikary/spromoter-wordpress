@@ -182,15 +182,14 @@ function spromoter_admin_scripts()
 function spromoter_front_styles()
 {
 	wp_enqueue_style('spromoter-main-styles', plugins_url('assets/css/spromoter-main.css', __FILE__));
-	wp_enqueue_style('spromoter-front-styles', plugins_url('assets/css/spromoter-front.css', __FILE__));
 }
 
 function spromoter_front_scripts()
 {
     if (class_exists('woocommerce')){
         $settings = spromoter_get_settings();
-        wp_enqueue_script('spromoter-front-scripts', plugins_url('assets/js/spromoter-front.js', __FILE__));
         wp_enqueue_script('spromoter-lightbox-scripts', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js');
+        wp_enqueue_script('spromoter-front-scripts', plugins_url('assets/js/spromoter-front.js', __FILE__));
 
         wp_localize_script('spromoter-front-scripts', 'spromoterSettings', array(
             'app_id' => $settings['app_id'],
