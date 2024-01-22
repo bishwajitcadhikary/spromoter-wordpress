@@ -9,12 +9,12 @@ function spromoter_display_admin_page(){
 
 	// Check if SPromoter is compatible
 	if (spromoter_compatible()) {
-		$spromoter = get_option('spromoter_settings', spromoter_get_default_settings());
+		$spromoter = spromoter_get_settings();
 
 		// Check if app_id and api_key are empty
 		if (empty($spromoter['app_id']) && empty($spromoter['api_key'])) {
 			// Check if page_type is set in POST
-			if (isset($_POST['page_type'])) {
+           if (isset($_POST['page_type'])) {
 				// Handle settings and registration based on page_type
 				if ($_POST['page_type'] == 'settings') {
 					spromoter_save_settings();
@@ -25,8 +25,16 @@ function spromoter_display_admin_page(){
                     }else{
                         spromoter_display_register_page();
                     }
-				}
-			} else {
+				}elseif ($_POST['page_type'] == 'login') {
+                    if (spromoter_login_user() && $_POST['app_id'] && $_POST['api_key']){
+                        spromoter_display_settings_page();
+                    }else{
+                        spromoter_display_login_page();
+                    }
+                }else{
+                    spromoter_display_login_page();
+                }
+			}  else {
 				// Display registration page if page_type is not set
 				spromoter_display_register_page();
 			}
@@ -35,6 +43,10 @@ function spromoter_display_admin_page(){
 			if (isset($_POST['page_type']) && $_POST['page_type'] == 'settings') {
 				spromoter_save_settings();
 			}
+
+            if (isset($_POST['submit_past_orders'])){
+                spromoter_send_past_orders();
+            }
 
 			// Always display settings page
 			spromoter_display_settings_page();

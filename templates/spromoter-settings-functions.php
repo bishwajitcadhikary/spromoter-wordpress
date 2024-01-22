@@ -1,6 +1,6 @@
 <?php
 
-use Spromoter\Api\SpromoterApi;
+use plugins\spromoter\inc\Api\SpromoterApi;
 
 function spromoter_display_register_page()
 {
@@ -97,6 +97,69 @@ function spromoter_display_register_page()
                                 <span>Already have an account?</span>
                                 <button type="submit" class="spromoter-button-link">
                                     Configure Here
+                                </button>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
+function spromoter_display_login_page()
+{
+    ?>
+    <div class="spromoter-container">
+        <div class="authentication-wrapper">
+            <div class="authentication-inner">
+                <div class="spromoter-settings-card">
+                    <div class="card-body">
+                        <!-- Logo -->
+                        <a href="#" class="spromoter-brand">
+                            <img src="<?= spromoter_get_image_url('logo.png') ?>" alt="SPromoter">
+                        </a>
+                        <h2 class="mb-2">Get started with SPromoter</h2>
+                        <p class="mb-4">Make your review management easy!</p>
+
+                        <form id="spromoterLoginForm" method="POST">
+                            <?= wp_nonce_field('spromoter_login_form'); ?>
+                            <input type="hidden" name="page_type" value="login">
+                            <div class="mb-3">
+                                <label for="app_id" class="spromoter-form-label mb-2">APP ID</label>
+                                <input
+                                        type="text"
+                                        class="spromoter-form-input"
+                                        id="app_id"
+                                        name="app_id"
+                                        placeholder="Enter app id"
+                                        autofocus
+                                        required
+                                        value=""
+                                />
+                            </div>
+                            <div class="mb-3">
+                                <label for="api_key" class="spromoter-form-label mb-2">API Key</label>
+                                <input
+                                        type="text"
+                                        class="spromoter-form-input"
+                                        id="api_key"
+                                        name="api_key"
+                                        placeholder="Enter api key"
+                                        required
+                                        value=""
+                                />
+                            </div>
+
+                            <button class="spromoter-button mb-3 w-100">Verify</button>
+                        </form>
+
+                        <form method="post">
+                            <p class="text-center">
+                                <span>New to SPromoter?</span>
+                                <button type="submit" class="spromoter-button-link">
+                                    Register Here
                                 </button>
                             </p>
                         </form>
@@ -239,6 +302,15 @@ function spromoter_display_settings_page()
                             <button type="submit" class="spromoter-button" form="spromoterSettingsForm">Save Changes
                             </button>
                         </div>
+
+                        <form method="POST" id="spromoterSubmitPastOrderForm">
+                            <?= wp_nonce_field('spromoter_submit_past_orders_form'); ?>
+                            <input type="hidden" name="submit_past_orders" value="true">
+                        </form>
+
+                        <button class="spromoter-submit-past-orders-button" type="submit" form="spromoterSubmitPastOrderForm">
+                            Submit Past Orders
+                        </button>
                     </div>
                 </div>
             </div>
@@ -258,6 +330,7 @@ function spromoter_save_settings()
         $spromoter_settings['review_show_in'] = $_POST['review_show_in'];
         $spromoter_settings['disable_native_review_system'] = ($_POST['disable_native_review_system'] == '1');
         $spromoter_settings['show_bottom_line_widget'] = ($_POST['show_bottom_line_widget'] == '1');
+        $spromoter_settings['configured_at'] = time();
 
         // Check credentials
         $spromoter = new SpromoterApi();
@@ -301,6 +374,54 @@ function spromoter_register_user()
         } else {
             spromoter_display_messages('Please check your credentials', true);
             return false;
+        }
+    }
+}
+
+function spromoter_login_user()
+{
+    if (isset($_POST['page_type']) && $_POST['page_type'] == 'login') {
+        check_admin_referer('spromoter_login_form');
+        $spromoter_settings = get_option('spromoter_settings', spromoter_get_default_settings());
+
+        // Check credentials
+        $spromoter = new SpromoterApi();
+        $response = $spromoter->verifyUser(array(
+            'app_id' => $_POST['app_id'],
+            'api_key' => $_POST['api_key'],
+        ));
+
+        dd($response);
+
+        if ($response['status'] == 'success') {
+            $spromoter_settings['app_id'] = $response['data']['app_id'];
+            $spromoter_settings['api_key'] = $response['data']['api_key'];
+
+            update_option('spromoter_settings', $spromoter_settings);
+            spromoter_display_messages('User registered successfully');
+
+            return true;
+        } else {
+            spromoter_display_messages('Please check your credentials', true);
+            return false;
+        }
+    }
+}
+
+function spromoter_send_past_orders()
+{
+    if (isset($_POST['submit_past_orders']) && $_POST['submit_past_orders'] == 'true') {
+        check_admin_referer('spromoter_submit_past_orders_form');
+
+        // Check credentials
+        $spromoter = new SpromoterApi();
+        $response = $spromoter->sendPastOrders();
+
+        dd($response);
+        if ($response['status'] == 'success') {
+            spromoter_display_messages('Past orders sent successfully');
+        } else {
+            spromoter_display_messages('Please check your credentials', true);
         }
     }
 }
