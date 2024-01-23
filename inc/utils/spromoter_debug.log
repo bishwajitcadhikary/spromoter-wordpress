@@ -1,4 +1,0 @@
-[01/04/2024 @ 2:40:58AM] spromoter_wc_on_order_status_changed Error while sending order data to SPromoter API
-[01/04/2024 @ 2:42:53AM] spromoter_wc_on_order_status_changed The given data was invalid
-[01/04/2024 @ 2:44:47AM] spromoter_wc_on_order_status_changed ::{"order_id":["The order id field must be a string."]}
-[01/08/2024 @ 4:12:45PM] spromoter_wc_on_order_status_changed Unauthenticated.::null

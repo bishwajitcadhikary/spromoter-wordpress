@@ -11,7 +11,8 @@ License: GPLv2 or later
 */
 
 use Automattic\WooCommerce\Utilities\FeaturesUtil;
-use Spromoter\Api\SpromoterApi;
+use plugins\spromoter\classes\SPromoterReviewExport;
+use plugins\spromoter\inc\Api\SpromoterApi;
 
 register_activation_hook(__FILE__, 'spromoter_activate');
 register_deactivation_hook(__FILE__, 'spromoter_deactivate');
@@ -145,6 +146,7 @@ function spromoter_wc_on_order_status_changed($order_id){
         }
     }
 }
+
 function spromoter_activate()
 {
 	if (current_user_can('activate_plugins')) {
